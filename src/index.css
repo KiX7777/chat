@@ -1,0 +1,25 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Orbitron';
+  letter-spacing: 1.5px;
+}
+
+@font-face {
+  font-family: 'Orbitron';
+  src: url(/src/assets/Orbitron-VariableFont_wght.ttf);
+}
+
+html {
+  font-size: 62.5%;
+
+  letter-spacing: 1.5px;
+}
+
+:root {
+  --backgroundColor: #fefefe;
+  --font-color: #000;
+  --inputcolor: #fefefe;
+  --secondary-font-color: #efefef;
+}

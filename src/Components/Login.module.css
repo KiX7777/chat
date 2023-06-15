@@ -1,0 +1,188 @@
+.loginContainer {
+  display: grid;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  justify-content: initial;
+  width: 100%;
+}
+.loginContainer h1 {
+  text-align: center;
+}
+
+.login {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  flex-direction: column;
+  gap: 2rem;
+  max-width: 60rem;
+  align-self: baseline;
+}
+.login label {
+  font-size: 1.8rem;
+  animation: appear 400ms ease forwards;
+}
+.login .randomName {
+  background-color: #1625f2;
+  border-radius: 0.5rem;
+  color: white;
+  cursor: pointer;
+  padding: 0.5rem;
+}
+.login input {
+  font-size: 1.6rem;
+  border-radius: 0.5rem;
+  font-family: inherit;
+  letter-spacing: 1.5px;
+  width: 100%;
+  color: var(--font-color);
+  background-color: var(--inputcolor);
+  animation: appear 400ms ease forwards;
+  padding: 0.8rem 1rem;
+  border: 1px solid #1625f2;
+}
+.login input::-moz-placeholder {
+  color: #555;
+}
+.login input::placeholder {
+  color: #555;
+}
+.login input:focus:invalid {
+  outline: 1px solid red;
+}
+
+.btns {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  gap: 2rem;
+}
+.btns button {
+  flex: 1;
+}
+
+.loginBtn,
+.loginBtns {
+  width: 100%;
+  padding: 0.5rem;
+  cursor: pointer;
+  font-size: 1.6rem;
+  background-color: #1625f2;
+  border: none;
+  color: var(--secondary-font-color);
+  border-radius: 0.5rem;
+  font-family: inherit;
+}
+
+.loginBtn:hover,
+.loginBtns:hover {
+  background-color: #224eff;
+}
+
+.loginBtn:active,
+.loginBtns:active {
+  scale: 0.95;
+}
+
+.fieldContainer {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 0.2rem;
+  flex-direction: column;
+  position: relative;
+  width: 100%;
+}
+.fieldContainer .error {
+  font-size: 1.3rem;
+  color: red;
+  position: absolute;
+  bottom: -25%;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  width: 100%;
+}
+
+.loginSwitch {
+  width: 100%;
+  margin-bottom: 2rem;
+  display: grid;
+  grid-template-columns: 1fr 0.5fr 1fr;
+  grid-template-rows: none;
+  align-items: center;
+}
+.loginSwitch label {
+  font-size: 2rem;
+  justify-self: end;
+}
+.loginSwitch label:last-of-type {
+  justify-self: baseline;
+}
+.loginSwitch input {
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  width: 5rem;
+  position: relative;
+  justify-self: center;
+  height: 2.5rem;
+  padding: 0.6rem 1rem;
+  cursor: pointer;
+  flex: 0.5;
+}
+
+.loginSwitch input::before {
+  width: 4.8rem;
+  content: "";
+  border: 1px solid #1625f2;
+  border-radius: 1rem;
+  height: 2.5rem;
+  position: absolute;
+  left: 0;
+  top: 0;
+  gap: 1rem;
+  transition: 400ms ease;
+}
+
+.loginSwitch input::after {
+  content: "";
+  position: absolute;
+  width: 2.2rem;
+  height: 2.2rem;
+  left: 2.5px;
+  top: 2.5px;
+  border-radius: 50%;
+  background-color: #1625f2;
+  transition: 400ms ease;
+}
+
+.loginSwitch input:checked::before {
+  background-color: #1625f2;
+}
+
+.loginSwitch input:checked::after {
+  background-color: white;
+  left: 50%;
+}
+
+@keyframes appear {
+  from {
+    scale: 0;
+  }
+  to {
+    scale: 1;
+  }
+}
+@media screen and (width < 500px) {
+  .loginContainer {
+    justify-content: initial;
+    width: 100%;
+  }
+  .login {
+    width: 100%;
+  }
+}/*# sourceMappingURL=Login.module.css.map */

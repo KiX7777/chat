@@ -1,0 +1,18 @@
+.messagesContainer {
+  flex: 1;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-direction: column;
+  width: 100%;
+  gap: 2rem;
+  overflow-y: auto;
+}
+
+.messagesContainer::-webkit-scrollbar {
+  width: 5px;
+}
+
+.messagesContainer::-webkit-scrollbar-thumb {
+  background-color: #1625f2;
+}/*# sourceMappingURL=Messages.module.css.map */

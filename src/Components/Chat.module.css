@@ -1,0 +1,71 @@
+.chatContainer {
+  border-radius: 0.5rem;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+  flex-direction: column;
+  display: flex;
+  justify-items: center;
+  gap: 2rem;
+}
+
+.messagesContainer {
+  width: 100%;
+  border: 1px solid #1625f2;
+  border-radius: 0.5rem;
+  padding: 1rem;
+  gap: 3.2rem;
+  flex: 1;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-direction: column;
+}
+.messagesContainer h1 {
+  width: 100%;
+}
+.messagesContainer .room {
+  text-align: center;
+}
+
+.btn {
+  width: 100%;
+  padding: 0.5rem;
+  cursor: pointer;
+  font-size: 1.6rem;
+  background-color: #1625f2;
+  border: none;
+  color: var(--secondary-font-color);
+  border-radius: 0.5rem;
+  font-family: inherit;
+  width: 30%;
+}
+
+.chooseRoom {
+  display: grid;
+  width: 30%;
+  gap: 1rem;
+}
+.chooseRoom button {
+  width: 100%;
+}
+.chooseRoom input {
+  padding: 1rem;
+  border-radius: 0.5rem;
+  border: 1px solid #1625f2;
+}
+
+.logOut {
+  width: 100%;
+  padding: 0.5rem;
+  cursor: pointer;
+  font-size: 1.6rem;
+  background-color: #1625f2;
+  border: none;
+  color: var(--secondary-font-color);
+  border-radius: 0.5rem;
+  font-family: inherit;
+  width: 10%;
+  position: absolute;
+  right: 1rem;
+}/*# sourceMappingURL=Chat.module.css.map */

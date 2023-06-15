@@ -1,0 +1,44 @@
+@use '../styles/mixins' as *;
+@use '../styles/colors' as *;
+
+.chatForm {
+  width: 100%;
+  max-width: 60rem;
+}
+
+.newMessageContainer {
+  @include flex(space-between, center);
+  margin-top: auto;
+  width: 100%;
+
+  form {
+    @include flex(space-between, center);
+    width: 100%;
+  }
+
+  button {
+    height: 5rem;
+    width: 5rem;
+    border-radius: 0.5rem;
+    background-color: transparent;
+    cursor: pointer;
+    border: none;
+
+    svg {
+      width: 70%;
+      height: 70%;
+      fill: $primary;
+    }
+  }
+
+  input {
+    padding: 1rem;
+    border: 1px solid $primary;
+    flex: 1;
+    height: 5rem;
+    border-radius: 0.5rem;
+    font-size: 1.6rem;
+    font-family: inherit;
+    letter-spacing: 1.5px;
+  }
+}

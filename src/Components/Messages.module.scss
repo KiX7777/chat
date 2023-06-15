@@ -1,0 +1,18 @@
+@use '../styles/colors' as *;
+@use '../styles/mixins' as *;
+.messagesContainer {
+  flex: 1;
+  @include flex(flex-start, flex-start);
+  flex-direction: column;
+  width: 100%;
+  gap: 2rem;
+  overflow-y: auto;
+}
+
+.messagesContainer::-webkit-scrollbar {
+  width: 5px;
+}
+
+.messagesContainer::-webkit-scrollbar-thumb {
+  background-color: $primary;
+}

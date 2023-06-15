@@ -1,0 +1,41 @@
+.chatForm {
+  width: 100%;
+  max-width: 60rem;
+}
+
+.newMessageContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: auto;
+  width: 100%;
+}
+.newMessageContainer form {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+.newMessageContainer button {
+  height: 5rem;
+  width: 5rem;
+  border-radius: 0.5rem;
+  background-color: transparent;
+  cursor: pointer;
+  border: none;
+}
+.newMessageContainer button svg {
+  width: 70%;
+  height: 70%;
+  fill: #1625f2;
+}
+.newMessageContainer input {
+  padding: 1rem;
+  border: 1px solid #1625f2;
+  flex: 1;
+  height: 5rem;
+  border-radius: 0.5rem;
+  font-size: 1.6rem;
+  font-family: inherit;
+  letter-spacing: 1.5px;
+}/*# sourceMappingURL=ChatForm.module.css.map */
