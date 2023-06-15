@@ -1,12 +1,8 @@
-import React from 'react'
 import classes from './Login.module.css'
 import { useState, useRef } from 'react'
 import { Formik } from 'formik'
-import { useNavigate } from 'react-router-dom'
 import * as Yup from 'yup'
 import { useAppDispatch, useAppSelector } from '../hooks'
-import { userActions } from '../Stores/UserSlice'
-import { checkUsername, logOut } from '../firebaseFunctions'
 import { login, signUp } from '../Stores/UserSlice'
 import { generateName } from '../helpers'
 // import { GoogleLogin } from '../store/userStore'
@@ -31,10 +27,10 @@ const Login = () => {
   // const cart = useAppSelector((state) => state.cart)
   const userState = useAppSelector((state) => state.user)
   const dispatch = useAppDispatch()
-  const navigate = useNavigate()
   const [loginMode, setloginMode] = useState(true)
   const specialRegex = /^[\p{L}0-9 .]+$/gu
   const emailRegex =
+    // eslint-disable-next-line no-useless-escape
     /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
 
   return (
@@ -115,7 +111,8 @@ const Login = () => {
                   type='button'
                   onClick={() => {
                     const name = generateName()
-                    nameRef.current.value = name
+                    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+                    nameRef.current!.value = name
                   }}
                 >
                   Choose Random Username
@@ -160,16 +157,6 @@ const Login = () => {
           </form>
         )}
       </Formik>
-
-      <button
-        onClick={() => {
-          console.log(userState)
-          // checkUsername('kiko')
-          console.log(checkUsername('kiko'))
-        }}
-      >
-        state
-      </button>
     </div>
   )
 }

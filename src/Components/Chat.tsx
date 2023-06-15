@@ -1,6 +1,6 @@
-import React, { useEffect } from 'react'
+import { useEffect } from 'react'
 import classes from './Chat.module.css'
-import { useState, useRef } from 'react'
+import { useState } from 'react'
 import {
   set,
   ref,
@@ -10,7 +10,7 @@ import {
   remove,
 } from 'firebase/database'
 import Messages from './Messages'
-import { logout } from '../Stores/UserSlice'
+import { logout, User } from '../Stores/UserSlice'
 
 import {
   database,
@@ -18,7 +18,6 @@ import {
   checkRoom,
   usersRef,
   setOnlineStatus,
-  checkUsername,
 } from '../firebaseFunctions'
 import ChatForm from './ChatForm'
 import { useAppSelector, useAppDispatch } from '../hooks'
@@ -26,7 +25,7 @@ import { useAppSelector, useAppDispatch } from '../hooks'
 export type Message = {
   sender: string
   message: string
-  time: any
+  time: string
 }
 
 const Chat = () => {
@@ -75,9 +74,13 @@ const Chat = () => {
       }
       setRoomUsers(usersOnline)
     })
+
+    return () => {
+      unsubscribe()
+    }
   }, [room])
 
-  const setUserInRoom = async (user) => {
+  const setUserInRoom = async (user: User) => {
     const nodeRef = child(roomsRef, `${input}/users/${user.id}`)
     onDisconnect(nodeRef).set(null)
     await set(nodeRef, user.username)
@@ -160,15 +163,6 @@ const Chat = () => {
         }}
       >
         LOG OUT
-      </button>
-      <button
-        onClick={async () => {
-          console.log(user)
-          // checkUsername(input)
-          console.log(await checkUsername(input))
-        }}
-      >
-        state
       </button>
     </div>
   )

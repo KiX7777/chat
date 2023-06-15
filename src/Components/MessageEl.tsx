@@ -1,4 +1,3 @@
-import React from 'react'
 import classes from './MessageEl.module.css'
 import { Message } from './Chat'
 import { useAppSelector } from '../hooks'

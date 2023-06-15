@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
+/* eslint-disable react-refresh/only-export-components */
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import {
   emailLogin,
@@ -8,7 +10,7 @@ import {
   checkUsername,
 } from '../firebaseFunctions'
 
-interface Initial {
+export interface User {
   username: string
   email: string
   password: string
@@ -16,7 +18,7 @@ interface Initial {
   id: string
 }
 
-const initialState: Initial = {
+const initialState: User = {
   username: '',
   email: '',
   password: '',
@@ -26,13 +28,7 @@ const initialState: Initial = {
 
 export const login = createAsyncThunk(
   'user/login',
-  async (
-    user: {
-      email: string
-      password: string
-    },
-    thunkAPI
-  ) => {
+  async (user: { email: string; password: string }) => {
     try {
       const res = await emailLogin(user.email, user.password)
       console.log(res)
@@ -44,6 +40,7 @@ export const login = createAsyncThunk(
         localStorage.setItem('id', res.uid)
         return { email: user.email, password: user.password, id: res.uid }
       }
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
       return error.message
     }
@@ -99,7 +96,8 @@ export const logout = createAsyncThunk('user/logOut', async (_, thunkAPI) => {
   try {
     await logOut()
     localStorage.delete('id')
-  } catch (error) {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  } catch (error: any) {
     thunkAPI.rejectWithValue(error.message)
   }
 })
