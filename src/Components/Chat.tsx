@@ -25,7 +25,7 @@ import { useAppSelector, useAppDispatch } from '../hooks'
 export type Message = {
   sender: string
   message: string
-  time: string
+  time: any
 }
 
 const Chat = () => {

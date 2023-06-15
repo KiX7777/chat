@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import { useEffect } from 'react'
 import { Message } from './Chat'
 import classes from './Messages.module.css'
 import MessageEl from './MessageEl'

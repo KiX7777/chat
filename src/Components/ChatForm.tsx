@@ -1,4 +1,3 @@
-import React from 'react'
 import classes from './ChatForm.module.css'
 import { useRef } from 'react'
 import { ref, child, set, serverTimestamp } from 'firebase/database'
@@ -28,6 +27,7 @@ const ChatForm = (room: { room: string }) => {
       console.log(message)
       //send message to server
       await set(nodeRef, message)
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
       inputRef.current!.value = ''
     }
   }
