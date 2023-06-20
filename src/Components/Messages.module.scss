@@ -10,9 +10,10 @@
 }
 
 .messagesContainer::-webkit-scrollbar {
-  width: 5px;
+  width: 10px;
 }
 
 .messagesContainer::-webkit-scrollbar-thumb {
+  border-left: 6px solid white;
   background-color: $primary;
 }

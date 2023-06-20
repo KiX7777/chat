@@ -1,7 +1,7 @@
 import React from 'react';
 import { useAppSelector, useAppDispatch } from '../hooks';
 import { logout } from '../Stores/UserSlice';
-import classes from '../Components/IndiviudalChat.module.css';
+import classes from './IndiviudalChat.module.css';
 import {
   ref,
   child,
@@ -46,7 +46,6 @@ const IndividualChat = () => {
         snapshot.forEach((val) => {
           const msg = val.val();
           msgs.push(msg);
-          console.log(msgs);
         });
         setchatMessages(msgs);
       });
@@ -82,26 +81,28 @@ const IndividualChat = () => {
   console.log(chatMessages);
   return (
     <div className={classes.chatContainer}>
-      <button
-        type='button'
-        className={classes.backBtn}
-        onClick={() => {
-          navigate(-1);
-        }}
-      >
-        Back
-      </button>
-      <button
-        className={classes.logOut}
-        onClick={async () => {
-          const onlineStatusRef = child(usersRef, `${user.id}/online`);
-          await set(onlineStatusRef, false);
-          dispatch(logout());
-          navigate('/');
-        }}
-      >
-        LOG OUT
-      </button>
+      <div className={classes.btns}>
+        <button
+          type='button'
+          className={classes.backBtn}
+          onClick={() => {
+            navigate(-1);
+          }}
+        >
+          Back
+        </button>
+        <button
+          className={classes.logOut}
+          onClick={async () => {
+            const onlineStatusRef = child(usersRef, `${user.id}/online`);
+            await set(onlineStatusRef, false);
+            dispatch(logout());
+            navigate('/');
+          }}
+        >
+          LOG OUT
+        </button>
+      </div>
       <h1>{otherUser?.username}</h1>
 
       <div className={classes.messagesContainer}>

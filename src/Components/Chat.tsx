@@ -9,7 +9,6 @@ import {
   onDisconnect,
   remove,
 } from 'firebase/database';
-import Messages from './Messages';
 import { logout, User } from '../Stores/UserSlice';
 
 import {
@@ -19,7 +18,8 @@ import {
   usersRef,
   setOnlineStatus,
 } from '../firebaseFunctions';
-import ChatForm from './ChatForm';
+import { chatActions } from '../Stores/ChatSlice';
+import Conversations from './Conversations';
 import { useAppSelector, useAppDispatch } from '../hooks';
 import UserFinder from './UserFinder';
 import RoomChat from '../pages/RoomChat';
@@ -37,9 +37,10 @@ const Chat = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const [messages, setMessages] = useState<Message[]>([]);
-  const [chooseRoom, setChooseRoom] = useState(false);
+  const chooseRoom = useAppSelector((state) => state.chat.chooseRoom);
   const [roomUsers, setRoomUsers] = useState<string[]>([]);
   const user = useAppSelector((state) => state.user);
+  const showConvos = useAppSelector((state) => state.chat.showConvos);
 
   useEffect(() => {
     const roomRef = ref(database, `rooms/${room}`);
@@ -97,15 +98,15 @@ const Chat = () => {
         const nodeRef = child(roomsRef, `${input}`);
         await set(nodeRef, false);
         setRoom(input);
-        setChooseRoom(true);
-        // setOnlineStatus(true, user)
+        dispatch(chatActions.showChooseRoomBtn());
         setUserInRoom(user);
+        dispatch(chatActions.closeFindOptions());
       } else {
         //just enter room
         setRoom(input);
-        setChooseRoom(true);
-        // setOnlineStatus(true, user)
+        dispatch(chatActions.showChooseRoomBtn());
         setUserInRoom(user);
+        dispatch(chatActions.closeFindOptions());
       }
     }
   };
@@ -121,6 +122,7 @@ const Chat = () => {
             onClick={() => {
               setRoom('');
               console.log('test');
+              dispatch(chatActions.closeChooseRoom());
             }}
           >
             Back
@@ -130,7 +132,9 @@ const Chat = () => {
           <button
             className={classes.btn}
             onClick={() => {
-              setChooseRoom(false);
+              dispatch(chatActions.closeChooseRoom());
+              dispatch(chatActions.closeFindOptions());
+
               console.log(roomUsers);
             }}
           >
@@ -158,17 +162,14 @@ const Chat = () => {
           <button className={classes.btn}>Enter room {input}</button>
         </form>
       )}
-      {/* {room && (
-        <div className={classes.messagesContainer}>
-          <h1 className={classes.room}>{room}</h1>
-          <h3>
-            Online: <p>{roomUsers.join(', ')}</p>
-          </h3>
-          <Messages messages={messages} />
-          <ChatForm room={room} />
-        </div>
-      )} */}
-
+      <button
+        className={`${classes.btn} ${classes.convosBtn}`}
+        onClick={() => {
+          dispatch(chatActions.toggleShowConvos());
+        }}
+      >
+        {showConvos ? 'Hide conversations' : 'Show conversations'}
+      </button>
       {room && (
         <RoomChat roomUsers={roomUsers} room={room} messages={messages} />
       )}
@@ -185,6 +186,7 @@ const Chat = () => {
       >
         LOG OUT
       </button>
+      {showConvos && <Conversations />}{' '}
     </div>
   );
 };

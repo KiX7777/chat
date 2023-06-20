@@ -1,14 +1,8 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import React from 'react';
 import classes from './UserFinder.module.css';
-import {
-  getUsers,
-  database,
-  chatExists,
-  startIndividualChat,
-} from '../firebaseFunctions';
+import { database, chatExists } from '../firebaseFunctions';
 import { useRef, useEffect, useState } from 'react';
-import { validateYupSchema } from 'formik';
 import { useNavigate } from 'react-router-dom';
 import {
   ref,
@@ -19,8 +13,8 @@ import {
   set,
 } from 'firebase/database';
 import { useAppSelector, useAppDispatch } from '../hooks';
-import IndividualChat from './IndividualChat';
 import { startIndChat } from '../Stores/UserSlice';
+import { chatActions } from '../Stores/ChatSlice';
 
 export interface UserCardProps {
   username: string;
@@ -28,9 +22,8 @@ export interface UserCardProps {
   online: boolean;
 }
 
-const UserCard = ({ user }: { user: UserCardProps }) => {
+export const UserCard = ({ user }: { user: UserCardProps }) => {
   const currentUser = useAppSelector((state) => state.user);
-  const [openChat, setOpenChat] = useState('');
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
@@ -82,14 +75,16 @@ const UserCard = ({ user }: { user: UserCardProps }) => {
 const UserFinder = () => {
   const inputRef = useRef<HTMLInputElement>(null);
   const currentUser = useAppSelector((state) => state.user);
+  const dispatch = useAppDispatch();
 
   const [users, setusers] = useState<UserCardProps[]>([]);
   const [foundUsers, setFoundUsers] = useState<UserCardProps[] | boolean>(
     false
   );
   const onlineUsers = users.slice().filter((u) => u.online);
-  const [seeOnlineUsers, setseeOnlineUsers] = useState(false);
+  // const [seeOnlineUsers, setseeOnlineUsers] = useState(false);
   const [seeAllUsers, setseeAllUsers] = useState(false);
+  const seeOnlineUsers = useAppSelector((state) => state.chat.seeAllUsers);
 
   useEffect(() => {
     const usersRef = query(ref(database, 'users'), ...[orderByValue()]);
@@ -135,11 +130,18 @@ const UserFinder = () => {
   }
 
   return (
-    <div className={classes.userFinder}>
+    <div
+      className={
+        !seeOnlineUsers
+          ? `${classes.userFinder}`
+          : `${classes.userFinder} ${classes.open}`
+      }
+    >
       <button
         type='button'
         onClick={() => {
-          setseeOnlineUsers((prev) => !prev);
+          dispatch(chatActions.toggleFindOptions());
+          // setseeOnlineUsers((prev) => !prev);
         }}
       >
         Find User(s)

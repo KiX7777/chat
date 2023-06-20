@@ -2,13 +2,21 @@
   display: flex;
   flex-direction: column;
   border-radius: 0.5rem;
+  gap: 2rem;
   align-items: center;
   height: 100dvh;
   width: 100%;
   padding: 2rem;
 }
 
-.backBtn {
+.btns {
+  display: flex;
+  gap: 1rem;
+  width: 30%;
+}
+
+.backBtn,
+.logOut {
   width: 100%;
   padding: 0.5rem;
   cursor: pointer;
@@ -18,7 +26,6 @@
   color: var(--secondary-font-color);
   border-radius: 0.5rem;
   font-family: inherit;
-  width: 30%;
 }
 
 .messagesContainer {
@@ -28,8 +35,36 @@
   display: flex;
   flex-direction: column;
   padding: 1rem;
+  height: 4rem;
   border: 1px solid #1625f2;
 }
+.messagesContainer h1 {
+  width: 20%;
+  overflow-x: auto;
+}
+.messagesContainer h4 {
+  width: -moz-fit-content;
+  width: fit-content;
+}
 .messagesContainer p {
-  font-size: 1.6rem;
+  font-size: 1.4rem;
+  overflow-x: auto;
+  white-space: nowrap;
+  flex: 1;
+}
+
+@media screen and (width < 500px) {
+  .chatContainer {
+    gap: 1rem;
+  }
+  .btns {
+    width: 100%;
+  }
+  .messagesContainer h1 {
+    width: 25%;
+    font-size: 1.4rem;
+  }
+  .messagesContainer p {
+    font-size: 1.2rem;
+  }
 }/*# sourceMappingURL=IndiviudalChat.module.css.map */

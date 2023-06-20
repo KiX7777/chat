@@ -110,6 +110,14 @@ export async function checkRoom(room) {
   return data;
 }
 
+export async function getIndividualChats(user) {
+  const chatsRef = query(ref(database, `users/${user.id}`));
+  const chats = [];
+  const snapshot = await get(chatsRef);
+  const data = snapshot.val();
+  return data.chats;
+}
+
 export async function chatExists(user, combinedID) {
   const chatsRef = query(ref(database, `users/${user.id}/chats`));
   const ids = [];

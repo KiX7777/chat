@@ -1,9 +1,16 @@
 import classes from './MessageEl.module.css';
 import { Message } from './Chat';
 import { useAppSelector } from '../hooks';
+import moment from 'moment/min/moment-with-locales';
 
-const MessageEl = ({ message }: { message: Message }) => {
+import 'moment/locale/es';
+import { useEffect, useRef, useState } from 'react';
+
+const MessageEl = ({ message }: { message: Message; idx: number }) => {
   const user = useAppSelector((state) => state.user);
+  moment.locale('hr');
+  const time = moment(message.time).format();
+
   return (
     <div
       className={
@@ -14,7 +21,7 @@ const MessageEl = ({ message }: { message: Message }) => {
     >
       <h1>{message.sender}</h1>
       <p>{message.message}</p>
-      <h4>{`${new Date(message.time).toLocaleTimeString().slice(0, -3)}`}</h4>
+      <h4>{`${moment(time).fromNow()}`}</h4>
     </div>
   );
 };

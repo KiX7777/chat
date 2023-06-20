@@ -38,4 +38,13 @@
   font-size: 1.6rem;
   font-family: inherit;
   letter-spacing: 1.5px;
+}
+
+@media screen and (width < 500px) {
+  .newMessageContainer input {
+    height: 4rem;
+  }
+  .newMessageContainer button svg {
+    height: 60%;
+  }
 }/*# sourceMappingURL=ChatForm.module.css.map */
