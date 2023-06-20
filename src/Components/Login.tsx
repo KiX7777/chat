@@ -1,37 +1,35 @@
-import classes from './Login.module.css'
-import { useState, useRef } from 'react'
-import { Formik } from 'formik'
-import * as Yup from 'yup'
-import { useAppDispatch, useAppSelector } from '../hooks'
-import { login, signUp } from '../Stores/UserSlice'
-import { generateName } from '../helpers'
+import classes from './Login.module.css';
+import { useState, useRef } from 'react';
+import { Formik } from 'formik';
+import * as Yup from 'yup';
+import { useAppDispatch, useAppSelector } from '../hooks';
+import { login, signUp } from '../Stores/UserSlice';
+import { generateName } from '../helpers';
 // import { GoogleLogin } from '../store/userStore'
 
 // import { signUp, logIn, logout } from '../store/userStore'
 
 export interface User {
-  username: string
-  password: string
-  email: string
+  username: string;
+  password: string;
+  email: string;
 }
 
 const initialValues: User = {
   username: '',
   password: '',
   email: '',
-}
+};
 
 const Login = () => {
-  const nameRef = useRef<HTMLInputElement>(null)
-  // const userStore = useAppSelector((state) => state.user)
-  // const cart = useAppSelector((state) => state.cart)
-  const userState = useAppSelector((state) => state.user)
-  const dispatch = useAppDispatch()
-  const [loginMode, setloginMode] = useState(true)
-  const specialRegex = /^[\p{L}0-9 .]+$/gu
+  const nameRef = useRef<HTMLInputElement>(null);
+  const userState = useAppSelector((state) => state.user);
+  const dispatch = useAppDispatch();
+  const [loginMode, setloginMode] = useState(true);
+  const specialRegex = /^[\p{L}0-9 .]+$/gu;
   const emailRegex =
     // eslint-disable-next-line no-useless-escape
-    /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+    /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
   return (
     <div className={classes.loginContainer}>
@@ -42,7 +40,7 @@ const Login = () => {
           type='checkbox'
           id='switch'
           onChange={(e) => {
-            setloginMode(!e.target.checked)
+            setloginMode(!e.target.checked);
           }}
         />
         <label htmlFor='switch'>Sign Up</label>
@@ -71,20 +69,20 @@ const Login = () => {
             username: values.username || generateName(),
             password: values.password,
             email: values.email,
-          }
+          };
 
           if (!loginMode) {
-            dispatch(signUp(user))
-            resetForm()
+            dispatch(signUp(user));
+            resetForm();
           } else {
             if (userState.loggedIn) {
-              alert('User is already logged in.')
-              return
+              alert('User is already logged in.');
+              return;
             }
-            dispatch(login(user))
-            resetForm()
+            dispatch(login(user));
+            resetForm();
 
-            return
+            return;
           }
           // }
         }}
@@ -93,11 +91,7 @@ const Login = () => {
           <form className={classes.login} onSubmit={formik.handleSubmit}>
             {!loginMode && (
               <div className={classes.fieldContainer}>
-                <label
-                  htmlFor='username'
-                  placeholder='Your username'
-                  defaultValue={loginMode ? 'login' : ''}
-                >
+                <label htmlFor='username' placeholder='Your username'>
                   Username
                 </label>
                 <input
@@ -110,9 +104,10 @@ const Login = () => {
                   className={classes.randomName}
                   type='button'
                   onClick={() => {
-                    const name = generateName()
+                    const name = generateName();
                     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-                    nameRef.current!.value = name
+                    nameRef.current!.value = name;
+                    formik.values.username = name;
                   }}
                 >
                   Choose Random Username
@@ -150,7 +145,14 @@ const Login = () => {
             </div>
 
             <div className={classes.btns}>
-              <button className={classes.loginBtn} type='submit'>
+              <button
+                className={
+                  userState.error
+                    ? `${classes.loginBtn} ${classes.error}`
+                    : `${classes.loginBtn}`
+                }
+                type='submit'
+              >
                 {!loginMode ? 'SIGN UP' : 'LOGIN'}
               </button>
             </div>
@@ -158,7 +160,7 @@ const Login = () => {
         )}
       </Formik>
     </div>
-  )
-}
+  );
+};
 
-export default Login
+export default Login;

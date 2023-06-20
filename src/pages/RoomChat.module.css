@@ -1,3 +1,7 @@
+.roomChatContainer {
+  flex: 1;
+}
+
 .chatContainer {
   border-radius: 0.5rem;
   overflow: hidden;
@@ -14,6 +18,7 @@
   border: 1px solid #1625f2;
   border-radius: 0.5rem;
   padding: 1rem;
+  height: 100%;
   gap: 3.2rem;
   flex: 1;
   display: flex;
@@ -39,11 +44,6 @@
   border-radius: 0.5rem;
   font-family: inherit;
   width: 30%;
-}
-
-.btns {
-  display: flex;
-  justify-content: space-between;
 }
 
 .chooseRoom {
@@ -79,4 +79,4 @@
   .logOut {
     width: 30%;
   }
-}/*# sourceMappingURL=Chat.module.css.map */
+}/*# sourceMappingURL=RoomChat.module.css.map */

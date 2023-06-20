@@ -1,36 +1,90 @@
-import classes from './ChatForm.module.css'
-import { useRef } from 'react'
-import { ref, child, set, serverTimestamp } from 'firebase/database'
-import { database } from '../firebaseFunctions'
-import { Message } from './Chat'
-import { useAppSelector } from '../hooks'
+import classes from './ChatForm.module.css';
+import { useRef } from 'react';
+import { ref, child, set, serverTimestamp } from 'firebase/database';
+import { database, sendIndividualMessage } from '../firebaseFunctions';
+import { Message } from './Chat';
+import { useAppSelector, useAppDispatch } from '../hooks';
+import { sendIndMessage } from '../Stores/UserSlice';
 
-const ChatForm = (room: { room: string }) => {
-  const inputRef = useRef<HTMLInputElement | null>(null)
-  const time = serverTimestamp()
+const ChatForm = ({
+  room,
+  combinedID,
+  receiverID,
+}: {
+  room?: string;
+  combinedID?: string;
+  receiverID?: string;
+}) => {
+  const inputRef = useRef<HTMLInputElement | null>(null);
+  const time = serverTimestamp();
+  const dispatch = useAppDispatch();
+  console.log(room);
+  const currentuser = useAppSelector((state) => state.user);
 
-  const user = useAppSelector((state) => state.user)
-  const handleSubmit = async () => {
-    const date = Date.now()
-    //enter the correct room database
-    const roomRef = ref(database, `rooms/${room.room}`)
-    //create new message with current time as key
-    const nodeRef = child(roomRef, `${date}`)
-    const inputMsg = inputRef.current?.value as string
-    if (inputMsg) {
-      const message: Message = {
-        // sender: user.username,
-        sender: user.username,
-        time: time,
-        message: inputMsg,
-      }
-      console.log(message)
-      //send message to server
-      await set(nodeRef, message)
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-      inputRef.current!.value = ''
-    }
+  async function sendMessage(userID: string) {
+    const receiverRef = ref(database, `users/${userID}/chats/${combinedID}`);
+    const senderRef = ref(
+      database,
+      `users/${currentuser.id}/chats/${combinedID}`
+    );
+    const userChats = ref(database, `userChats/${combinedID}`);
+    const childNodeRec = child(receiverRef, `messages/${Date.now()}`);
+    const childNodeSend = child(senderRef, `messages/${Date.now()}`);
+    await set(childNodeSend, {
+      sender: currentuser.username,
+      message: inputRef.current?.value,
+      time: Date.now(),
+    });
+    await set(childNodeRec, {
+      sender: currentuser.username,
+      message: inputRef.current?.value,
+      time: Date.now(),
+    });
+    // await set(userChats, {
+    //   id: currentuser.id,
+    //   username: currentuser.username,
+    // });
   }
+
+  const handleSubmit = async () => {
+    const inputMsg = inputRef.current?.value as string;
+
+    if (room) {
+      const date = Date.now();
+      //enter the correct room database
+      const roomRef = ref(database, `rooms/${room}`);
+      //create new message with current time as key
+      const nodeRef = child(roomRef, `${date}`);
+      if (inputMsg) {
+        const message: Message = {
+          // sender: user.username,
+          sender: currentuser.username,
+          time: time,
+          message: inputMsg,
+        };
+        console.log(message);
+        //send message to server
+        await set(nodeRef, message);
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+        inputRef.current!.value = '';
+      }
+    } else {
+      if (inputMsg) {
+        console.log('nothing');
+        dispatch(
+          sendIndMessage({
+            currentuser,
+            receiverID,
+            combinedID,
+            inputMsg,
+          })
+        );
+
+        inputRef.current!.value = '';
+        return;
+      }
+    }
+  };
   // const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
   // }
 
@@ -38,8 +92,8 @@ const ChatForm = (room: { room: string }) => {
     <div className={classes.newMessageContainer}>
       <form
         onSubmit={(e) => {
-          e.preventDefault()
-          handleSubmit()
+          e.preventDefault();
+          handleSubmit();
         }}
       >
         <label htmlFor='message' hidden></label>
@@ -87,7 +141,7 @@ const ChatForm = (room: { room: string }) => {
         USER
       </button> */}
     </div>
-  )
-}
+  );
+};
 
-export default ChatForm
+export default ChatForm;

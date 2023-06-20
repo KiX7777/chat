@@ -4,7 +4,9 @@
   align-items: center;
   box-shadow: 2px 5px 10px rgba(0, 0, 0, 0.1);
   padding: 1rem;
+  background-color: white;
   width: 100%;
+  border-radius: 0.5rem;
   gap: 3rem;
   animation: appear 400ms forwards ease;
 }
@@ -20,6 +22,7 @@
 .messageContainer p {
   flex: 1;
   font-size: 1.4rem;
+  overflow-x: auto;
 }
 
 @keyframes appear {
@@ -40,4 +43,28 @@
 .messageContainer.sender h1,
 .messageContainer.sender h4 {
   color: white;
+}
+
+p::-webkit-scrollbar {
+  height: 2px;
+}
+
+p::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+p::-webkit-scrollbar-thumb {
+  background-color: white;
+  border-radius: 1rem;
+}
+
+@media screen and (width < 500px) {
+  .messageContainer h1 {
+    width: 25%;
+    font-size: 1.4rem;
+  }
+  .messageContainer p {
+    font-size: 1.2rem;
+    overflow-x: auto;
+  }
 }/*# sourceMappingURL=MessageEl.module.css.map */

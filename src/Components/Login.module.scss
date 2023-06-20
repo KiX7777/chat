@@ -19,6 +19,7 @@
   flex-direction: column;
   gap: 2rem;
   max-width: 60rem;
+  justify-self: center;
   align-self: baseline;
 
   label {
@@ -68,6 +69,10 @@
 .loginBtn,
 .loginBtns {
   @include btn;
+}
+
+.loginBtn.error {
+  background-color: red;
 }
 
 .loginBtn:hover,
