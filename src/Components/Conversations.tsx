@@ -1,7 +1,7 @@
 import classes from './Conversations.module.css';
 import { getIndividualChats } from '../firebaseFunctions';
 import { useEffect, useState, useRef } from 'react';
-import { useAppDispatch, useAppSelector } from '../hooks';
+import { useAppSelector } from '../hooks';
 import { Message } from './Chat';
 import { User } from '../Stores/UserSlice';
 import moment from 'moment/min/moment-with-locales';
@@ -22,6 +22,7 @@ const Conversations = () => {
   const dref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    //get all user's individual chats when the component loads
     async function getChats(user: User) {
       const res: any = await getIndividualChats(user);
       const chats: Chat[] = [];
@@ -40,7 +41,6 @@ const Conversations = () => {
         };
         chats.push(chat);
       }
-      console.log(Object.entries(chats[0].messages).slice(-1)[0][1].message);
       setChats(chats);
     }
 
@@ -57,9 +57,7 @@ const Conversations = () => {
           <h6>{ch.interlocutor}</h6>
           <div className={classes.lastMsg}>
             <small>{ch.message}</small>
-            {/* <small className={classes.lastMsgTime}>{`${new Date(ch.time)
-              .toLocaleTimeString()
-              .slice(0, -3)}`}</small> */}
+
             <small className={classes.lastMsgTime}>
               {`${moment(ch.time).fromNow()}`}
             </small>

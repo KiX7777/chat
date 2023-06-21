@@ -3,6 +3,7 @@
 
 .roomChatContainer {
   flex: 1;
+  @include flex(initial, initial);
 }
 
 .chatContainer {
@@ -19,9 +20,10 @@
 .messagesContainer {
   width: 100%;
   border: 1px solid $primary;
+  min-height: 75dvh;
   border-radius: 0.5rem;
   padding: 1rem;
-  height: 100%;
+
   gap: 3.2rem;
   // height: 70dvh;
   flex: 1;
@@ -64,5 +66,14 @@
 @media screen and (width < 500px) {
   .logOut {
     width: 30%;
+  }
+  .messagesContainer {
+    min-height: 70dvh;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  .messagesContainer {
+    border: 1px solid white;
   }
 }

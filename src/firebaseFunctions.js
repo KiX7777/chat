@@ -112,7 +112,6 @@ export async function checkRoom(room) {
 
 export async function getIndividualChats(user) {
   const chatsRef = query(ref(database, `users/${user.id}`));
-  const chats = [];
   const snapshot = await get(chatsRef);
   const data = snapshot.val();
   return data.chats;
@@ -176,14 +175,6 @@ export async function getUsers() {
     }
     return users;
   });
-
-  // const snapshot = await get(usersRef);
-  // const data = snapshot.val();
-  // const users = [];
-  // for (const user in data) {
-  //   users.push(data[user]);
-  // }
-  // return users;
 }
 
 export async function startIndividualChat(sender, receiver, id) {
@@ -228,7 +219,6 @@ export async function sendIndividualMessage(
 ) {
   const receiverRef = ref(database, `users/${receiverID}/chats/${combinedID}`);
   const senderRef = ref(database, `users/${sender.id}/chats/${combinedID}`);
-  const userChats = ref(database, `userChats/${combinedID}`);
   const childNodeRec = child(receiverRef, `messages/${Date.now()}`);
   const childNodeSend = child(senderRef, `messages/${Date.now()}`);
   await set(childNodeSend, {

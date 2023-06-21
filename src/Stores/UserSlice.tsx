@@ -12,7 +12,6 @@ import {
   startIndividualChat,
   sendIndividualMessage,
 } from '../firebaseFunctions';
-import { User as UserType } from 'firebase/auth';
 import { UserCardProps } from '../Components/UserFinder';
 
 export interface User {
@@ -38,11 +37,9 @@ export const login = createAsyncThunk(
   async (user: { email: string; password: string }, thunkAPI) => {
     try {
       const res = await emailLogin(user.email, user.password);
-      console.log(res);
       if (typeof res === 'string') {
-        console.log('first');
+        //firebase sometimes fullfills request but it returns an error
         throw new Error(res);
-        return;
       } else {
         localStorage.setItem('id', res.uid);
         setOnlineStatus(true, { ...user, id: res.uid });
@@ -72,19 +69,17 @@ export const signUp = createAsyncThunk(
     thunkAPI
   ) => {
     try {
+      //when creating a new account first check it there is an account with the selected username
       const existingUsers = await checkUsername();
-      console.log(existingUsers);
+
       if (existingUsers.includes(user.username)) {
         return thunkAPI.rejectWithValue('Username taken');
-
-        // throw new Error('Username taken')
       } else {
-        console.log(user.username);
         const res = await emailSignUp(user.email, user.password);
-        console.log(res);
         if (typeof res === 'string') {
           throw new Error(res);
         } else {
+          //set user's username to the one he entered
           updateUsername(user.username);
           createUser({ username: user.username, id: res.uid, online: true });
           localStorage.setItem('id', res.uid);
@@ -183,9 +178,6 @@ export const UserSlice = createSlice({
     },
   },
   extraReducers(builder) {
-    // builder.addCase(login.pending, (state) => {
-    //   state.
-    // })
     builder.addCase(login.fulfilled, (state, action) => {
       if (action.payload!.id) {
         state.email = action.payload!.email;
@@ -220,18 +212,13 @@ export const UserSlice = createSlice({
       state.password = '';
       state.id = '';
     });
-    // builder.addCase(startIndChat.pending, (state) => {
 
-    // });
-    // builder.addCase(startIndChat.fulfilled, (state) => {});
     builder.addCase(startIndChat.rejected, (state, action) => {
       state.error = action.payload as string;
     });
     builder.addCase(sendIndMessage.rejected, (state, action) => {
       state.error = action.payload as string;
     });
-    // builder.addCase(signUp.rejected, (state) => {})
-    // builder.addCase(login.rejected, (state) => {})
   },
 });
 

@@ -15,6 +15,7 @@ const Messages = (props: Messages) => {
   ));
 
   useEffect(() => {
+    //scroll down when new message is sent/received
     scrollBottomRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [props.messages]);
 

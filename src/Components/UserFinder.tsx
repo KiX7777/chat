@@ -4,14 +4,7 @@ import classes from './UserFinder.module.css';
 import { database, chatExists } from '../firebaseFunctions';
 import { useRef, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import {
-  ref,
-  orderByValue,
-  query,
-  onValue,
-  child,
-  set,
-} from 'firebase/database';
+import { ref, orderByValue, query, onValue } from 'firebase/database';
 import { useAppSelector, useAppDispatch } from '../hooks';
 import { startIndChat } from '../Stores/UserSlice';
 import { chatActions } from '../Stores/ChatSlice';
@@ -27,6 +20,7 @@ export const UserCard = ({ user }: { user: UserCardProps }) => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
+  //create unique ID by combining IDs of both users
   const combinedID =
     currentUser.id > user.id
       ? currentUser.id + user.id
@@ -34,24 +28,18 @@ export const UserCard = ({ user }: { user: UserCardProps }) => {
 
   return (
     <div className={classes.userCard}>
-      <h1
-        onClick={() => {
-          // setOpenChat(combinedID);
-        }}
-      >
-        {user.username}
-      </h1>
+      <h1>{user.username}</h1>
       {user.online && <span className={classes.onlineIndicator}></span>}
       {user.username !== currentUser.username ? (
         <button
           onClick={async () => {
+            //check if the chat with that user already exists
             const exists = await chatExists(currentUser, combinedID);
             if (exists) {
-              console.log('exits → navigating');
+              //if it does, enter the room
               navigate(`/chat/${combinedID}`);
             } else {
-              // startIndividualChat(currentUser, user, combinedID);
-              console.log('doesnt exist → creating and navigating');
+              //if it doesn't, create the chat and enter it
               dispatch(
                 startIndChat({
                   currentUser,
@@ -66,6 +54,7 @@ export const UserCard = ({ user }: { user: UserCardProps }) => {
           MESSAGE
         </button>
       ) : (
+        //mark current user and disable sending the message to yourself
         <img src='/user.webp' alt={user.username} />
       )}
     </div>
@@ -76,28 +65,25 @@ const UserFinder = () => {
   const inputRef = useRef<HTMLInputElement>(null);
   const currentUser = useAppSelector((state) => state.user);
   const dispatch = useAppDispatch();
-
   const [users, setusers] = useState<UserCardProps[]>([]);
   const [foundUsers, setFoundUsers] = useState<UserCardProps[] | boolean>(
     false
   );
   const onlineUsers = users.slice().filter((u) => u.online);
-  // const [seeOnlineUsers, setseeOnlineUsers] = useState(false);
   const [seeAllUsers, setseeAllUsers] = useState(false);
   const seeOnlineUsers = useAppSelector((state) => state.chat.seeAllUsers);
 
   useEffect(() => {
     const usersRef = query(ref(database, 'users'), ...[orderByValue()]);
 
+    //get all the users in the app
     const unsubscribe = onValue(usersRef, (snapshot) => {
       const users = [];
       const data = snapshot.val();
-      console.log(data);
       for (const user in data) {
         users.push(data[user]);
       }
       setusers(users);
-      console.log(users);
     });
     return () => {
       unsubscribe();
@@ -106,12 +92,11 @@ const UserFinder = () => {
 
   async function handleSubmit(e: React.KeyboardEvent) {
     const input = inputRef.current?.value.toLowerCase() as string;
+    //search the users by the entered query
     if (e.key === 'Enter' && input !== '') {
-      console.log(foundUsers);
       const found = users
         .slice()
         .filter((user) => user.username.toLowerCase().includes(input));
-      console.log(found);
       if (found) {
         setFoundUsers(found);
         setseeAllUsers(false);
@@ -141,7 +126,6 @@ const UserFinder = () => {
         type='button'
         onClick={() => {
           dispatch(chatActions.toggleFindOptions());
-          // setseeOnlineUsers((prev) => !prev);
         }}
       >
         Find User(s)

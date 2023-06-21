@@ -4,10 +4,11 @@
 .chatContainer {
   border-radius: 0.5rem;
   width: 100%;
-  height: 100%;
+  min-height: 100dvh;
   flex-direction: column;
   display: flex;
   justify-items: center;
+  padding: 1rem;
   gap: 2rem;
 }
 
@@ -15,6 +16,7 @@
   width: 100%;
   border: 1px solid $primary;
   border-radius: 0.5rem;
+  height: 100%;
   padding: 1rem;
   gap: 3.2rem;
   // height: 70dvh;
@@ -40,9 +42,11 @@
   display: flex;
   justify-content: space-between;
 }
+
 .chooseRoom {
   display: grid;
   width: 30%;
+  margin-top: 2rem;
   gap: 1rem;
   align-self: center;
   button {
@@ -75,6 +79,16 @@
   }
 
   .btn {
-    width: 60%;
+    width: 70%;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  .messagesContainer {
+    border: 1px solid white;
+  }
+
+  .chooseRoom input {
+    border: 1px solid white;
   }
 }

@@ -4,12 +4,11 @@
 .userFinder {
   width: 30%;
   min-width: 30rem;
-  padding: 1rem;
   background-color: #fefefe;
   border-radius: 0.5rem;
   display: flex;
   flex-direction: column;
-  transition: 300ms ease;
+  transition: 400ms ease;
   gap: 2rem;
   button {
     @include btn();
@@ -102,5 +101,20 @@
   to {
     opacity: 1;
     transform: scale(1);
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  .userFinder {
+    background-color: var(--darkMode);
+    color: white;
+
+    input {
+      border: 1px solid white;
+    }
+  }
+  .userCard {
+    color: white;
+    background-color: #222;
   }
 }

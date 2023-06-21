@@ -80,3 +80,9 @@ h1::-webkit-scrollbar-thumb {
     }
   }
 }
+
+@media (prefers-color-scheme: dark) {
+  .messageContainer {
+    background-color: var(--darkMode);
+  }
+}

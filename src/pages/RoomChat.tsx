@@ -1,4 +1,3 @@
-import React from 'react';
 import { Message } from '../Components/Chat';
 import classes from './RoomChat.module.css';
 import Messages from '../Components/Messages';

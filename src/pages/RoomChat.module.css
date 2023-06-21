@@ -1,5 +1,8 @@
 .roomChatContainer {
   flex: 1;
+  display: flex;
+  justify-content: initial;
+  align-items: initial;
 }
 
 .chatContainer {
@@ -16,9 +19,9 @@
 .messagesContainer {
   width: 100%;
   border: 1px solid #1625f2;
+  min-height: 75dvh;
   border-radius: 0.5rem;
   padding: 1rem;
-  height: 100%;
   gap: 3.2rem;
   flex: 1;
   display: flex;
@@ -78,5 +81,13 @@
 @media screen and (width < 500px) {
   .logOut {
     width: 30%;
+  }
+  .messagesContainer {
+    min-height: 70dvh;
+  }
+}
+@media (prefers-color-scheme: dark) {
+  .messagesContainer {
+    border: 1px solid white;
   }
 }/*# sourceMappingURL=RoomChat.module.css.map */

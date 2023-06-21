@@ -4,9 +4,8 @@ import { useAppSelector } from '../hooks';
 import moment from 'moment/min/moment-with-locales';
 
 import 'moment/locale/es';
-import { useEffect, useRef, useState } from 'react';
 
-const MessageEl = ({ message }: { message: Message; idx: number }) => {
+const MessageEl = ({ message }: { message: Message }) => {
   const user = useAppSelector((state) => state.user);
   moment.locale('hr');
   const time = moment(message.time).format();

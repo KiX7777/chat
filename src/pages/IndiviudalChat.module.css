@@ -29,8 +29,8 @@
 }
 
 .messagesContainer {
-  width: 100%;
   height: 90%;
+  width: 100%;
   flex: 1;
   display: flex;
   flex-direction: column;
@@ -66,5 +66,10 @@
   }
   .messagesContainer p {
     font-size: 1.2rem;
+  }
+}
+@media (prefers-color-scheme: dark) {
+  .messagesContainer {
+    border: 1px solid white;
   }
 }/*# sourceMappingURL=IndiviudalChat.module.css.map */

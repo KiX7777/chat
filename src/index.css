@@ -1,3 +1,11 @@
+:root {
+  color-scheme: light dark;
+}
+
+#root {
+  min-height: 100dvh;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -13,12 +21,12 @@
 
 html {
   font-size: 62.5%;
-
   letter-spacing: 1.5px;
 }
 
 :root {
   --backgroundColor: #fefefe;
+  --darkMode: #3b3b3b;
   --font-color: #000;
   --inputcolor: #fefefe;
   --secondary-font-color: #efefef;

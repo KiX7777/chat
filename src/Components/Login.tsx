@@ -5,9 +5,6 @@ import * as Yup from 'yup';
 import { useAppDispatch, useAppSelector } from '../hooks';
 import { login, signUp } from '../Stores/UserSlice';
 import { generateName } from '../helpers';
-// import { GoogleLogin } from '../store/userStore'
-
-// import { signUp, logIn, logout } from '../store/userStore'
 
 export interface User {
   username: string;
@@ -45,13 +42,10 @@ const Login = () => {
         />
         <label htmlFor='switch'>Sign Up</label>
       </div>
-      {/* )} */}
+
       <Formik
         initialValues={initialValues}
         validationSchema={Yup.object({
-          // username: Yup.string()
-          //   .required('You must select a username.')
-          //   .matches(specialRegex),
           username: Yup.string().when('loginMode', (username) =>
             username
               ? Yup.string()
@@ -70,7 +64,7 @@ const Login = () => {
             password: values.password,
             email: values.email,
           };
-
+          //if the login mode is selected, log in the user, otherwise create new account
           if (!loginMode) {
             dispatch(signUp(user));
             resetForm();
@@ -84,7 +78,6 @@ const Login = () => {
 
             return;
           }
-          // }
         }}
       >
         {(formik) => (

@@ -5,7 +5,7 @@
   display: grid;
   align-items: center;
   justify-content: center;
-  padding: 0;
+  padding: 2rem;
   justify-content: initial;
   width: 100%;
   h1 {
@@ -41,7 +41,7 @@
     letter-spacing: 1.5px;
     width: 100%;
     color: var(--font-color);
-    background-color: var(--inputcolor);
+    background-color: var(--backgroundColor);
     animation: appear 400ms ease forwards;
     padding: 0.8rem 1rem;
     border: 1px solid $primary;
@@ -184,5 +184,12 @@
   }
   .login {
     width: 100%;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  .login input {
+    background-color: var(--darkMode);
+    color: white;
   }
 }

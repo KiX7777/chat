@@ -48,8 +48,28 @@
       height: 4rem;
     }
 
+    button {
+      width: 4rem;
+      height: 4rem;
+    }
+
     button svg {
       height: 60%;
+    }
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  .newMessageContainer {
+    button {
+      background-color: var(--darkMode);
+
+      svg {
+        fill: white;
+      }
+    }
+    input {
+      border: 1px solid white;
     }
   }
 }

@@ -75,4 +75,9 @@ h1::-webkit-scrollbar-thumb {
     font-size: 1.2rem;
     overflow-x: auto;
   }
+}
+@media (prefers-color-scheme: dark) {
+  .messageContainer {
+    background-color: var(--darkMode);
+  }
 }/*# sourceMappingURL=MessageEl.module.css.map */

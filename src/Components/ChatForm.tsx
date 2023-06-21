@@ -21,31 +21,6 @@ const ChatForm = ({
   console.log(room);
   const currentuser = useAppSelector((state) => state.user);
 
-  async function sendMessage(userID: string) {
-    const receiverRef = ref(database, `users/${userID}/chats/${combinedID}`);
-    const senderRef = ref(
-      database,
-      `users/${currentuser.id}/chats/${combinedID}`
-    );
-    const userChats = ref(database, `userChats/${combinedID}`);
-    const childNodeRec = child(receiverRef, `messages/${Date.now()}`);
-    const childNodeSend = child(senderRef, `messages/${Date.now()}`);
-    await set(childNodeSend, {
-      sender: currentuser.username,
-      message: inputRef.current?.value,
-      time: Date.now(),
-    });
-    await set(childNodeRec, {
-      sender: currentuser.username,
-      message: inputRef.current?.value,
-      time: Date.now(),
-    });
-    // await set(userChats, {
-    //   id: currentuser.id,
-    //   username: currentuser.username,
-    // });
-  }
-
   const handleSubmit = async () => {
     const inputMsg = inputRef.current?.value as string;
 
@@ -57,20 +32,18 @@ const ChatForm = ({
       const nodeRef = child(roomRef, `${date}`);
       if (inputMsg) {
         const message: Message = {
-          // sender: user.username,
           sender: currentuser.username,
           time: time,
           message: inputMsg,
         };
-        console.log(message);
-        //send message to server
+        //send message to the server
         await set(nodeRef, message);
         // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
         inputRef.current!.value = '';
       }
     } else {
+      //if it is individual chat
       if (inputMsg) {
-        console.log('nothing');
         dispatch(
           sendIndMessage({
             currentuser,
@@ -133,13 +106,6 @@ const ChatForm = ({
           </svg>
         </button>
       </form>
-      {/* <button
-        onClick={() => {
-          console.log(user)
-        }}
-      >
-        USER
-      </button> */}
     </div>
   );
 };

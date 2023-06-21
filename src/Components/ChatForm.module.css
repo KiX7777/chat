@@ -44,7 +44,22 @@
   .newMessageContainer input {
     height: 4rem;
   }
+  .newMessageContainer button {
+    width: 4rem;
+    height: 4rem;
+  }
   .newMessageContainer button svg {
     height: 60%;
+  }
+}
+@media (prefers-color-scheme: dark) {
+  .newMessageContainer button {
+    background-color: var(--darkMode);
+  }
+  .newMessageContainer button svg {
+    fill: white;
+  }
+  .newMessageContainer input {
+    border: 1px solid white;
   }
 }/*# sourceMappingURL=ChatForm.module.css.map */
