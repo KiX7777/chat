@@ -17,12 +17,14 @@ import { Message } from '../Components/Chat';
 import Messages from '../Components/Messages';
 import { useNavigate } from 'react-router-dom';
 import ChatForm from '../Components/ChatForm';
+import { useTranslation } from 'react-i18next';
 
 const IndividualChat = () => {
   const dispatch = useAppDispatch();
   const user = useAppSelector((state) => state.user);
   const navigate = useNavigate();
   const { id: combinedID } = useParams();
+  const { t } = useTranslation();
   const [chatMessages, setchatMessages] = useState<Message[]>([]);
   const currentUser = useAppSelector((state) => state.user);
   const [otherUser, setOtherUser] = useState<{
@@ -86,7 +88,7 @@ const IndividualChat = () => {
             navigate(-1);
           }}
         >
-          Back
+          {t('back')}
         </button>
         <button
           className={classes.logOut}
@@ -97,7 +99,7 @@ const IndividualChat = () => {
             navigate('/');
           }}
         >
-          LOG OUT
+          {t('logOut')}
         </button>
       </div>
       <h1>{otherUser?.username}</h1>

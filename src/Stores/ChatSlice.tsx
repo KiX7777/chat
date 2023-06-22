@@ -6,6 +6,8 @@ const initialState = {
   seeOnlineUsers: false,
   seeAllUsers: false,
   showConvos: true,
+  roomMessages: [],
+  roomUsers: [],
 };
 
 export const ChatSlice = createSlice({
@@ -23,6 +25,15 @@ export const ChatSlice = createSlice({
     },
     showChooseRoomBtn(state) {
       state.chooseRoom = true;
+    },
+    setRoom(state, action) {
+      state.room = action.payload;
+    },
+    setRoomUsers(state, action) {
+      state.roomUsers = action.payload;
+    },
+    setMessages(state, action) {
+      state.roomMessages = action.payload;
     },
 
     toggleShowConvos(state) {

@@ -5,6 +5,7 @@ import * as Yup from 'yup';
 import { useAppDispatch, useAppSelector } from '../hooks';
 import { login, signUp } from '../Stores/UserSlice';
 import { generateName } from '../helpers';
+import { useTranslation } from 'react-i18next';
 
 export interface User {
   username: string;
@@ -19,6 +20,7 @@ const initialValues: User = {
 };
 
 const Login = () => {
+  const { t } = useTranslation();
   const nameRef = useRef<HTMLInputElement>(null);
   const userState = useAppSelector((state) => state.user);
   const dispatch = useAppDispatch();
@@ -32,7 +34,7 @@ const Login = () => {
     <div className={classes.loginContainer}>
       {/* {!userStore.loggedIn && ( */}
       <div className={classes.loginSwitch}>
-        <label htmlFor='switch'>Login</label>
+        <label htmlFor='switch'>{t('login')}</label>
         <input
           type='checkbox'
           id='switch'
@@ -40,7 +42,7 @@ const Login = () => {
             setloginMode(!e.target.checked);
           }}
         />
-        <label htmlFor='switch'>Sign Up</label>
+        <label htmlFor='switch'>{t('SignUp')}</label>
       </div>
 
       <Formik
@@ -85,7 +87,7 @@ const Login = () => {
             {!loginMode && (
               <div className={classes.fieldContainer}>
                 <label htmlFor='username' placeholder='Your username'>
-                  Username
+                  {t('username')}
                 </label>
                 <input
                   type='username'
@@ -103,7 +105,7 @@ const Login = () => {
                     formik.values.username = name;
                   }}
                 >
-                  Choose Random Username
+                  {t('randomUsername')}
                 </button>
                 {formik.errors.username && formik.touched.username ? (
                   <p className={classes.error}>{formik.errors.username}</p>
@@ -125,7 +127,7 @@ const Login = () => {
             </div>
             <div className={classes.fieldContainer}>
               <label htmlFor='passwordcheck' placeholder='Your password'>
-                Password
+                {t('password')}
               </label>
               <input
                 type='password'
@@ -146,7 +148,7 @@ const Login = () => {
                 }
                 type='submit'
               >
-                {!loginMode ? 'SIGN UP' : 'LOGIN'}
+                {!loginMode ? t('SignUp') : t('login')}
               </button>
             </div>
           </form>

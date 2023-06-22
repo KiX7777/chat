@@ -5,6 +5,7 @@ import { database, sendIndividualMessage } from '../firebaseFunctions';
 import { Message } from './Chat';
 import { useAppSelector, useAppDispatch } from '../hooks';
 import { sendIndMessage } from '../Stores/UserSlice';
+import { useTranslation } from 'react-i18next';
 
 const ChatForm = ({
   room,
@@ -15,10 +16,10 @@ const ChatForm = ({
   combinedID?: string;
   receiverID?: string;
 }) => {
+  const { t } = useTranslation();
   const inputRef = useRef<HTMLInputElement | null>(null);
   const time = serverTimestamp();
   const dispatch = useAppDispatch();
-  console.log(room);
   const currentuser = useAppSelector((state) => state.user);
 
   const handleSubmit = async () => {
@@ -74,7 +75,7 @@ const ChatForm = ({
           ref={inputRef}
           type='text'
           id='message'
-          placeholder='Write your own message...'
+          placeholder={t('writeMsg')}
         />
         <button>
           <svg

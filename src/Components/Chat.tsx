@@ -17,7 +17,8 @@ import Conversations from './Conversations';
 import { useAppSelector, useAppDispatch } from '../hooks';
 import UserFinder from './UserFinder';
 import RoomChat from '../pages/RoomChat';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 export type Message = {
   sender: string;
@@ -27,11 +28,11 @@ export type Message = {
 
 const Chat = () => {
   const [room, setRoom] = useState('');
+  const { t } = useTranslation();
+  const navigate = useNavigate();
   const [input, setInput] = useState('');
   const dispatch = useAppDispatch();
-  const [messages, setMessages] = useState<Message[]>([]);
   const chooseRoom = useAppSelector((state) => state.chat.chooseRoom);
-  const [roomUsers, setRoomUsers] = useState<string[]>([]);
   const user = useAppSelector((state) => state.user);
   const showConvos = useAppSelector((state) => state.chat.showConvos);
 
@@ -51,13 +52,13 @@ const Chat = () => {
           return;
         }
       });
-      setMessages(msgs);
+      dispatch(chatActions.setMessages(msgs));
     });
 
     return () => {
       unsubscribe();
     };
-  }, [room]);
+  }, [room, dispatch]);
 
   useEffect(() => {
     //listen for changes in the room and show users who are in the room
@@ -68,13 +69,13 @@ const Chat = () => {
       for (const user in data) {
         usersOnline.push(data[user]);
       }
-      setRoomUsers(usersOnline);
+      dispatch(chatActions.setRoomUsers(usersOnline));
     });
 
     return () => {
       unsubscribe();
     };
-  }, [room]);
+  }, [room, dispatch]);
 
   const setUserInRoom = async (user: User) => {
     //when user connects add him to the room and vice versa
@@ -91,6 +92,7 @@ const Chat = () => {
         const nodeRef = child(roomsRef, `${input}`);
         await set(nodeRef, false);
         setRoom(input);
+        dispatch(chatActions.setRoom(input));
         dispatch(chatActions.showChooseRoomBtn());
         setUserInRoom(user);
         dispatch(chatActions.closeFindOptions());
@@ -98,6 +100,8 @@ const Chat = () => {
       } else {
         //just enter room
         setRoom(input);
+
+        dispatch(chatActions.setRoom(input));
         dispatch(chatActions.showChooseRoomBtn());
         setUserInRoom(user);
         dispatch(chatActions.closeFindOptions());
@@ -120,7 +124,7 @@ const Chat = () => {
               dispatch(chatActions.closeChooseRoom());
             }}
           >
-            Back
+            {t('back')}
           </button>
         )}
         {chooseRoom && (
@@ -129,11 +133,9 @@ const Chat = () => {
             onClick={() => {
               dispatch(chatActions.closeChooseRoom());
               dispatch(chatActions.closeFindOptions());
-
-              console.log(roomUsers);
             }}
           >
-            Change Room
+            {t('changeRoom')}
           </button>
         )}
       </div>
@@ -143,7 +145,7 @@ const Chat = () => {
           dispatch(chatActions.toggleShowConvos());
         }}
       >
-        {showConvos ? 'Hide conversations' : 'Show conversations'}
+        {showConvos ? t('hideConvos') : t('showConvos')}
       </button>
       {showConvos && <Conversations />}
 
@@ -158,19 +160,18 @@ const Chat = () => {
         >
           <input
             type='text'
-            placeholder='Select room'
+            placeholder={t('selectRoom')}
             value={input}
             onChange={(e) => {
               setInput(e.target.value);
             }}
           />
-          <button className={classes.btn}>Enter room</button>
+          <button className={classes.btn}>{t('enterRoom')}</button>
+          {/* <button className={classes.btn}> {t('enterRoom')}</button> */}
         </form>
       )}
 
-      {room && (
-        <RoomChat roomUsers={roomUsers} room={room} messages={messages} />
-      )}
+      {room && <RoomChat />}
       <button
         className={classes.logOut}
         onClick={async () => {
@@ -182,7 +183,7 @@ const Chat = () => {
           dispatch(logout());
         }}
       >
-        LOG OUT
+        {t('logOut')}
       </button>
     </div>
   );

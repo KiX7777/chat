@@ -1,0 +1,23 @@
+{
+  "title": "Chat aplikacija za razmjenu poruka",
+  "find": "Pronađi",
+  "seeOnline": "Vidi online korisnike",
+  "hideConvos": "Sakrij razgovore",
+  "showConvos": "Prikaži razgovore",
+  "convos": "Razgovori",
+  "noUsers": "Nema korisnika online",
+  "enterRoom": "Uđi u sobu",
+  "notFound": "Korisnici nisu pronađeni",
+  "selectRoom": "Odaberi sobu",
+  "changeRoom": "Promijeni sobu",
+  "logOut": "Odjava",
+  "back": "Natrag",
+  "writeMsg": "Napiši poruku...",
+
+  "message": "Pošalji poruku",
+  "login": "Prijava",
+  "SignUp": "Registracija",
+  "password": "Lozinka",
+  "username": "Korisničko ime",
+  "randomUsername": "Odaberi nasumično"
+}

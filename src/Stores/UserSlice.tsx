@@ -21,6 +21,7 @@ export interface User {
   loggedIn: boolean;
   id: string;
   error: string;
+  language: string;
 }
 
 const initialState: User = {
@@ -30,6 +31,7 @@ const initialState: User = {
   loggedIn: false,
   id: '',
   error: '',
+  language: 'hr',
 };
 
 export const login = createAsyncThunk(
@@ -175,6 +177,9 @@ export const UserSlice = createSlice({
       if (action.payload.id) {
         state.loggedIn = true;
       }
+    },
+    setLanguage(state, action) {
+      state.language = action.payload;
     },
   },
   extraReducers(builder) {

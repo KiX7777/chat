@@ -5,9 +5,12 @@ import { auth, setOnlineStatus } from './firebaseFunctions';
 import { useAppDispatch, useAppSelector } from './hooks';
 import { onAuthStateChanged } from 'firebase/auth';
 import { Routes, Route } from 'react-router-dom';
-import moment from 'moment';
 import { userActions } from './Stores/UserSlice';
+import i18n from './i18n';
+
 import IndividualChat from './pages/IndividualChat';
+import RoomChat from './pages/RoomChat';
+import Layout from './UI/Layout';
 function App() {
   const dispatch = useAppDispatch();
   const user = useAppSelector((state) => state.user);
@@ -41,21 +44,23 @@ function App() {
 
   return (
     <>
-      <Routes>
-        <Route path='/' element={<Home />} />
-        {user.loggedIn && (
-          <>
-            <Route path='/chat/:id' element={<IndividualChat />}></Route>
-            <Route path='*' element={<h1>404 not found</h1>} />
-          </>
-        )}
-      </Routes>
-      {/* <Home /> */}
-      <footer>
-        <a href='https://github.com/KiX7777' target='_blank'>
-          Created by Kristian Božić <sup>Ⓡ</sup>
-        </a>
-      </footer>
+      <Layout>
+        <Routes>
+          <Route path='/' element={<Home />} />
+          {user.loggedIn && (
+            <>
+              <Route path='/chat/:id' element={<IndividualChat />}></Route>
+              <Route path='*' element={<h1>404 not found</h1>} />
+            </>
+          )}
+        </Routes>
+        {/* <Home /> */}
+        <footer>
+          <a href='https://github.com/KiX7777' target='_blank'>
+            Created by Kristian Božić <sup>Ⓡ</sup>
+          </a>
+        </footer>
+      </Layout>
     </>
   );
 }

@@ -1,6 +1,6 @@
 .messageContainer {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   box-shadow: 2px 5px 10px rgba(0, 0, 0, 0.1);
   padding: 1rem;
@@ -24,6 +24,7 @@
   width: fit-content;
 }
 .messageContainer p {
+  flex: 1;
   width: 30%;
   font-size: 1.4rem;
   overflow-x: auto;

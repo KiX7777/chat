@@ -1,0 +1,22 @@
+{
+  "title": "Chat application",
+  "find": "Find User(s)",
+  "seeOnline": "See Online Users",
+  "hideConvos": "Hide conversations",
+  "showConvos": "Show conversations",
+  "convos": "Conversations",
+  "enterRoom": "Enter room",
+  "noUsers": "No users online",
+  "notFound": "Users not found",
+  "changeRoom": "Change room",
+  "logOut": "LOG OUT",
+  "selectRoom": "Select room",
+  "writeMsg": "Write your message",
+  "back": "Back",
+  "message": "Message",
+  "login": "Login",
+  "SignUp": "Sign Up ",
+  "password": "Password",
+  "username": "Username",
+  "randomUsername": "Choose Random Username"
+}

@@ -4,7 +4,7 @@
 .chatContainer {
   border-radius: 0.5rem;
   width: 100%;
-  min-height: 100dvh;
+  min-height: calc(100dvh - 5rem);
   flex-direction: column;
   display: flex;
   justify-items: center;
@@ -80,6 +80,10 @@
 
   .btn {
     width: 70%;
+  }
+
+  .chatContainer {
+    min-height: calc(100dvh - 3rem);
   }
 }
 

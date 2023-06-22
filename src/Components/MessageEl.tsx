@@ -7,6 +7,7 @@ import 'moment/locale/es';
 
 const MessageEl = ({ message }: { message: Message }) => {
   const user = useAppSelector((state) => state.user);
+  user.language === 'hr' && moment.locale('hr');
   moment.locale('hr');
   const time = moment(message.time).format();
 

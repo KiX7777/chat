@@ -8,6 +8,7 @@ import { ref, orderByValue, query, onValue } from 'firebase/database';
 import { useAppSelector, useAppDispatch } from '../hooks';
 import { startIndChat } from '../Stores/UserSlice';
 import { chatActions } from '../Stores/ChatSlice';
+import { useTranslation } from 'react-i18next';
 
 export interface UserCardProps {
   username: string;
@@ -18,6 +19,7 @@ export interface UserCardProps {
 export const UserCard = ({ user }: { user: UserCardProps }) => {
   const currentUser = useAppSelector((state) => state.user);
   const navigate = useNavigate();
+  const { t } = useTranslation();
   const dispatch = useAppDispatch();
 
   //create unique ID by combining IDs of both users
@@ -51,7 +53,7 @@ export const UserCard = ({ user }: { user: UserCardProps }) => {
             }
           }}
         >
-          MESSAGE
+          {t('message')}
         </button>
       ) : (
         //mark current user and disable sending the message to yourself
@@ -69,6 +71,8 @@ const UserFinder = () => {
   const [foundUsers, setFoundUsers] = useState<UserCardProps[] | boolean>(
     false
   );
+  const { t } = useTranslation();
+
   const onlineUsers = users.slice().filter((u) => u.online);
   const [seeAllUsers, setseeAllUsers] = useState(false);
   const seeOnlineUsers = useAppSelector((state) => state.chat.seeAllUsers);
@@ -111,7 +115,7 @@ const UserFinder = () => {
       <UserCard key={us.id} user={us} />
     ));
   } else if (typeof foundUsers === 'object' && foundUsers.length === 0) {
-    foundUsersCards = <h4>Users not found</h4>;
+    foundUsersCards = <h4>{t('notFound')}</h4>;
   }
 
   return (
@@ -128,7 +132,7 @@ const UserFinder = () => {
           dispatch(chatActions.toggleFindOptions());
         }}
       >
-        Find User(s)
+        {t('find')}
       </button>
       {seeOnlineUsers && (
         <>
@@ -150,8 +154,8 @@ const UserFinder = () => {
             {seeAllUsers
               ? onlineUsers.length > 1
                 ? 'ONLINE'
-                : 'No users online'
-              : 'See Online Users'}
+                : t('noUsers')
+              : t('seeOnline')}
           </button>
 
           {seeAllUsers &&

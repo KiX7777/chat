@@ -2,7 +2,7 @@
 @use '../styles/mixins' as *;
 
 .messageContainer {
-  @include flex(center, center);
+  @include flex(space-between, center);
   box-shadow: 2px 5px 10px rgba(0, 0, 0, 0.1);
   padding: 1rem;
   background-color: white;
@@ -24,7 +24,7 @@
   }
 
   p {
-    // flex: 1;
+    flex: 1;
     width: 30%;
     font-size: 1.4rem;
     overflow-x: auto;

@@ -3,10 +3,19 @@
 
 .homeContainer {
   width: 100%;
-  min-height: 100dvh;
+  min-height: calc(100dvh - 5rem);
   position: relative;
   @include flex(center, center);
   flex-direction: column;
+
+  select {
+    font-size: 2rem;
+    border: 1px solid $primary;
+    border-radius: 0.5rem;
+    position: fixed;
+    right: 1rem;
+    bottom: 1rem;
+  }
 }
 
 footer {
@@ -23,6 +32,12 @@ footer {
 }
 footer a:hover {
   color: $primary;
+}
+
+@media screen and (width <500px) {
+  .homeContainer {
+    min-height: calc(100dvh - 3rem);
+  }
 }
 
 @media (prefers-color-scheme: dark) {

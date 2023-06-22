@@ -6,6 +6,7 @@ import { Message } from './Chat';
 import { User } from '../Stores/UserSlice';
 import moment from 'moment/min/moment-with-locales';
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 interface Chat {
   message: string;
   id: string;
@@ -20,7 +21,7 @@ const Conversations = () => {
   const user = useAppSelector((state) => state.user);
   const [chats, setChats] = useState<Chat[]>([]);
   const dref = useRef<HTMLDivElement>(null);
-
+  const { t } = useTranslation();
   useEffect(() => {
     //get all user's individual chats when the component loads
     async function getChats(user: User) {
@@ -51,7 +52,7 @@ const Conversations = () => {
 
   return (
     <div ref={dref} className={classes.conversationsContainer}>
-      <h1>CONVERSATIONS</h1>
+      <h1>{t('convos')}</h1>
       {chats.map((ch) => (
         <Link key={ch.id} to={`chat/${ch.id}`} className={classes.chatCard}>
           <h6>{ch.interlocutor}</h6>
