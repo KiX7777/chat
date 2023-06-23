@@ -1,4 +1,3 @@
-import { Message } from '../Components/Chat';
 import classes from './RoomChat.module.css';
 import Messages from '../Components/Messages';
 import ChatForm from '../Components/ChatForm';

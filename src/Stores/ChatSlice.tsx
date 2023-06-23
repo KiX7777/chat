@@ -45,4 +45,5 @@ export const ChatSlice = createSlice({
   },
 });
 
+// eslint-disable-next-line react-refresh/only-export-components
 export const chatActions = ChatSlice.actions;

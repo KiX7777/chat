@@ -4,7 +4,9 @@ import { useEffect, useState, useRef } from 'react';
 import { useAppSelector } from '../hooks';
 import { Message } from './Chat';
 import { User } from '../Stores/UserSlice';
-import moment from 'moment/min/moment-with-locales';
+import 'moment/dist/locale/hr';
+import moment from 'moment';
+
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 interface Chat {
@@ -15,17 +17,17 @@ interface Chat {
   time: string;
 }
 
-moment.locale('hr');
-
 const Conversations = () => {
   const user = useAppSelector((state) => state.user);
+  user.language === 'hr' ? moment.locale('hr') : moment.locale('en-gb');
   const [chats, setChats] = useState<Chat[]>([]);
   const dref = useRef<HTMLDivElement>(null);
   const { t } = useTranslation();
   useEffect(() => {
     //get all user's individual chats when the component loads
     async function getChats(user: User) {
-      const res: any = await getIndividualChats(user);
+      const res = await getIndividualChats(user);
+      console.log(res);
       const chats: Chat[] = [];
       for (const convo in res) {
         const chat: Chat = {

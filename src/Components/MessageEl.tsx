@@ -1,14 +1,13 @@
 import classes from './MessageEl.module.css';
 import { Message } from './Chat';
 import { useAppSelector } from '../hooks';
-import moment from 'moment/min/moment-with-locales';
-
-import 'moment/locale/es';
+import 'moment/dist/locale/hr';
+import 'moment/dist/locale/en-gb';
+import moment from 'moment';
 
 const MessageEl = ({ message }: { message: Message }) => {
   const user = useAppSelector((state) => state.user);
-  user.language === 'hr' && moment.locale('hr');
-  moment.locale('hr');
+  user.language === 'hr' ? moment.locale('hr') : moment.locale('en-gb');
   const time = moment(message.time).format();
 
   return (

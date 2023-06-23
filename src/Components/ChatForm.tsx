@@ -1,7 +1,8 @@
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import classes from './ChatForm.module.css';
 import { useRef } from 'react';
 import { ref, child, set, serverTimestamp } from 'firebase/database';
-import { database, sendIndividualMessage } from '../firebaseFunctions';
+import { database,  } from '../firebaseFunctions';
 import { Message } from './Chat';
 import { useAppSelector, useAppDispatch } from '../hooks';
 import { sendIndMessage } from '../Stores/UserSlice';
@@ -59,8 +60,7 @@ const ChatForm = ({
       }
     }
   };
-  // const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-  // }
+
 
   return (
     <div className={classes.newMessageContainer}>

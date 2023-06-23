@@ -8,7 +8,6 @@ import {
   query,
   orderByKey,
   onDisconnect,
-  orderByChild,
   equalTo,
   orderByValue,
   child,

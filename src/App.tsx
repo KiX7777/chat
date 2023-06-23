@@ -6,10 +6,8 @@ import { useAppDispatch, useAppSelector } from './hooks';
 import { onAuthStateChanged } from 'firebase/auth';
 import { Routes, Route } from 'react-router-dom';
 import { userActions } from './Stores/UserSlice';
-import i18n from './i18n';
 
 import IndividualChat from './pages/IndividualChat';
-import RoomChat from './pages/RoomChat';
 import Layout from './UI/Layout';
 function App() {
   const dispatch = useAppDispatch();

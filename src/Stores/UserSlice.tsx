@@ -94,7 +94,8 @@ export const signUp = createAsyncThunk(
           };
         }
       }
-    } catch (error: any) {
+    } catch (err: unknown) {
+      const error = err as Error;
       if (error.message === 'Firebase: Error (auth/email-already-in-use).') {
         return thunkAPI.rejectWithValue('There is an account with that email.');
       } else {
@@ -122,7 +123,7 @@ export const startIndChat = createAsyncThunk(
       user,
       combinedID,
     }: {
-      currentUser: any;
+      currentUser: User;
       user: UserCardProps;
       combinedID: string | undefined;
     },
@@ -130,7 +131,8 @@ export const startIndChat = createAsyncThunk(
   ) => {
     try {
       await startIndividualChat(currentUser, user, combinedID);
-    } catch (error: any) {
+    } catch (err: unknown) {
+      const error = err as Error;
       thunkAPI.rejectWithValue(error.message);
     }
   }
@@ -145,7 +147,7 @@ export const sendIndMessage = createAsyncThunk(
       combinedID,
       inputMsg,
     }: {
-      currentuser: any;
+      currentuser: User;
       receiverID: string | undefined;
       combinedID: string | undefined;
       inputMsg: string;
@@ -159,7 +161,8 @@ export const sendIndMessage = createAsyncThunk(
         combinedID,
         inputMsg
       );
-    } catch (error: any) {
+    } catch (err) {
+      const error = err as Error;
       thunkAPI.rejectWithValue(error.message);
     }
   }

@@ -17,19 +17,17 @@ import Conversations from './Conversations';
 import { useAppSelector, useAppDispatch } from '../hooks';
 import UserFinder from './UserFinder';
 import RoomChat from '../pages/RoomChat';
-import { Link, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
 export type Message = {
   sender: string;
   message: string;
-  time: any;
+  time: object;
 };
 
 const Chat = () => {
   const [room, setRoom] = useState('');
   const { t } = useTranslation();
-  const navigate = useNavigate();
   const [input, setInput] = useState('');
   const dispatch = useAppDispatch();
   const chooseRoom = useAppSelector((state) => state.chat.chooseRoom);

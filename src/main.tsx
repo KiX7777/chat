@@ -5,7 +5,6 @@ import './index.css';
 import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import store from './Stores/store.tsx';
-import i18n from './i18n';
 import './i18n';
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
