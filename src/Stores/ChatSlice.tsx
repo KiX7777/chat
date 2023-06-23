@@ -39,6 +39,9 @@ export const ChatSlice = createSlice({
     toggleShowConvos(state) {
       state.showConvos = !state.showConvos;
     },
+    showConvos(state) {
+      state.showConvos = true;
+    },
     closeShowConvos(state) {
       state.showConvos = false;
     },

@@ -11,7 +11,13 @@ import {
 } from 'firebase/database';
 import { logout, User } from '../Stores/UserSlice';
 
-import { database, roomsRef, checkRoom, usersRef } from '../firebaseFunctions';
+import {
+  database,
+  roomsRef,
+  checkRoom,
+  usersRef,
+  logOutRemove,
+} from '../firebaseFunctions';
 import { chatActions } from '../Stores/ChatSlice';
 import Conversations from './Conversations';
 import { useAppSelector, useAppDispatch } from '../hooks';
@@ -27,6 +33,7 @@ export type Message = {
 
 const Chat = () => {
   const [room, setRoom] = useState('');
+  const rm = useAppSelector((state) => state.chat.room);
   const { t } = useTranslation();
   const [input, setInput] = useState('');
   const dispatch = useAppDispatch();
@@ -168,20 +175,21 @@ const Chat = () => {
         </form>
       )}
 
-      {room && <RoomChat />}
-      <button
+      {rm && <RoomChat />}
+      {/* <button
         className={classes.logOut}
         onClick={async () => {
-          const roomUsersRef = ref(database, `rooms/${room}/users/${user.id}`);
-          await remove(roomUsersRef);
-          const onlineStatusRef = child(usersRef, `${user.id}/online`);
-          await set(onlineStatusRef, false);
-          setRoom('');
-          dispatch(logout());
+          // const roomUsersRef = ref(database, `rooms/${room}/users/${user.id}`);
+          // await remove(roomUsersRef);
+          // const onlineStatusRef = child(usersRef, `${user.id}/online`);
+          // await set(onlineStatusRef, false);
+          // setRoom('');
+          dispatch(chatActions.setRoom(''));
+          dispatch(logout({ room, user }));
         }}
       >
         {t('logOut')}
-      </button>
+      </button> */}
     </div>
   );
 };

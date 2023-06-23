@@ -20,7 +20,7 @@ const MessageEl = ({ message }: { message: Message }) => {
     >
       <h1>{message.sender}</h1>
       <p>{message.message}</p>
-      <h4>{`${moment(time).fromNow()}`}</h4>
+      <small>{`${moment(time).fromNow()}`}</small>
     </div>
   );
 };

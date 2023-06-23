@@ -45,7 +45,6 @@
 
 .chooseRoom {
   display: grid;
-  width: 30%;
   margin-top: 2rem;
   gap: 1rem;
   align-self: center;
@@ -60,19 +59,12 @@
   }
 }
 
-.logOut {
-  @include btn();
-  width: 10%;
-  position: absolute;
-  right: 1rem;
-}
-
 @media screen and (width < 500px) {
   .logOut {
     width: 30%;
   }
   .chooseRoom {
-    width: 60%;
+    // width: 60%;
   }
 
   .btns {

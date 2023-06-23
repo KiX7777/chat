@@ -58,7 +58,7 @@ const Conversations = () => {
         <Link key={ch.id} to={`chat/${ch.id}`} className={classes.chatCard}>
           <h6>{ch.interlocutor}</h6>
           <div className={classes.lastMsg}>
-            <small>{ch.message}</small>
+            <small className={classes.lastTxt}>{ch.message}</small>
 
             <small className={classes.lastMsgTime}>
               {`${moment(ch.time).fromNow()}`}

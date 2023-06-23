@@ -1,11 +1,15 @@
 import classes from './Layout.module.css';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../hooks';
-import { userActions } from '../Stores/UserSlice';
+import { userActions, logout } from '../Stores/UserSlice';
+import { chatActions } from '../Stores/ChatSlice';
 import i18n from '../i18n';
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+  const room = useAppSelector((state) => state.chat.room);
+  const user = useAppSelector((state) => state.user);
   const currentLanguage = useAppSelector((state) => state.user.language);
   const onChangeLang = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const lang_code = e.target.value;
@@ -23,6 +27,20 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
           <option value='hr'>🇭🇷</option>
           <option value='en'>🇬🇧</option>
         </select>
+        {user.loggedIn && (
+          <button
+            className={classes.logOut}
+            onClick={async () => {
+              navigate('/');
+              dispatch(chatActions.setRoom(''));
+              dispatch(chatActions.closeChooseRoom());
+              dispatch(logout({ room, user }));
+              dispatch(chatActions.showConvos());
+            }}
+          >
+            LOG OUT
+          </button>
+        )}
       </header>
       {children}
       <footer>

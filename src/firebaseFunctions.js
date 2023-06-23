@@ -11,6 +11,7 @@ import {
   equalTo,
   orderByValue,
   child,
+  remove,
   onValue,
 } from 'firebase/database';
 import {
@@ -82,6 +83,13 @@ export async function logOut() {
     .catch((error) => {
       console.log(error.message);
     });
+}
+
+export async function logOutRemove(room, user) {
+  const roomUsersRef = ref(database, `rooms/${room}/users/${user.id}`);
+  await remove(roomUsersRef);
+  const onlineStatusRef = child(usersRef, `${user.id}/online`);
+  await set(onlineStatusRef, false);
 }
 
 export async function updateUsername(username) {

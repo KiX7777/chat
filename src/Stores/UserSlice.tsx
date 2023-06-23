@@ -11,6 +11,7 @@ import {
   setOnlineStatus,
   startIndividualChat,
   sendIndividualMessage,
+  logOutRemove,
 } from '../firebaseFunctions';
 import { UserCardProps } from '../Components/UserFinder';
 import { RootState } from './store';
@@ -127,15 +128,19 @@ export const signUp = createAsyncThunk(
   }
 );
 
-export const logout = createAsyncThunk('user/logOut', async (_, thunkAPI) => {
-  try {
-    await logOut();
-    localStorage.delete('id');
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  } catch (error: any) {
-    thunkAPI.rejectWithValue(error.message);
+export const logout = createAsyncThunk(
+  'user/logOut',
+  async ({ room, user }: { room: string; user: User }, thunkAPI) => {
+    try {
+      await logOutRemove(room, user);
+      await logOut();
+      localStorage.delete('id');
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } catch (error: any) {
+      thunkAPI.rejectWithValue(error.message);
+    }
   }
-});
+);
 
 export const startIndChat = createAsyncThunk(
   'chat/start',

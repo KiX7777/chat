@@ -42,20 +42,40 @@
   color: #000000;
   display: flex;
   justify-content: space-between;
+  align-items: initial;
 }
 .chatCard .lastMsg {
   display: flex;
+  justify-content: flex-end;
+  align-items: center;
   gap: 1rem;
   flex: 1;
-  align-items: baseline;
-  justify-content: end;
+  width: 50%;
 }
 .chatCard .lastMsg small {
   font-size: 1.2rem;
   font-weight: normal;
 }
+.chatCard .lastMsg .lastTxt {
+  flex: 1;
+  text-align: right;
+  margin-right: 1rem;
+  overflow-x: auto;
+  white-space: nowrap;
+}
 .chatCard .lastMsg .lastMsgTime {
   font-size: 0.8rem;
+  width: -moz-fit-content;
+  width: fit-content;
+  max-width: 20%;
+}
+
+.lastTxt::-webkit-scrollbar {
+  height: 3px;
+}
+
+.lastTxt::-webkit-scrollbar-thumb {
+  background-color: #1625f2;
 }
 
 .chatCard:hover {

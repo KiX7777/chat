@@ -19,7 +19,7 @@
   white-space: nowrap;
   text-align: left;
 }
-.messageContainer h4 {
+.messageContainer small {
   width: -moz-fit-content;
   width: fit-content;
   font-size: 0.8rem;
@@ -48,7 +48,7 @@
 }
 .messageContainer.sender p,
 .messageContainer.sender h1,
-.messageContainer.sender h4 {
+.messageContainer.sender small {
   color: white;
 }
 
