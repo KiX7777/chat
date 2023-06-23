@@ -14,7 +14,6 @@ import {
 } from '../firebaseFunctions';
 import { UserCardProps } from '../Components/UserFinder';
 import { RootState } from './store';
-import { Message } from '../Components/Chat';
 
 export interface User {
   username: string;
