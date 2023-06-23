@@ -1,16 +1,48 @@
+@use '../styles/colors' as *;
+
 .header {
   height: 5rem;
+  position: relative;
 
   img {
     width: 100%;
     height: 100%;
     object-fit: contain;
   }
+
+  select {
+    font-size: 2rem;
+    border: 1px solid $primary;
+    border-radius: 0.5rem;
+    position: absolute;
+    right: 0.5rem;
+    top: 0.5rem;
+  }
+}
+
+footer {
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+
+  a {
+    text-decoration: none;
+    font-size: 0.8rem;
+    color: black;
+  }
+}
+footer a:hover {
+  color: $primary;
 }
 
 @media screen and (width <500px) {
   .header {
     height: 3rem;
+
+    select {
+      font-size: 1.4rem;
+    }
   }
 }
 

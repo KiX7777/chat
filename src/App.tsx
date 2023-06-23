@@ -53,11 +53,7 @@ function App() {
           )}
         </Routes>
         {/* <Home /> */}
-        <footer>
-          <a href='https://github.com/KiX7777' target='_blank'>
-            Created by Kristian Božić <sup>Ⓡ</sup>
-          </a>
-        </footer>
+  
       </Layout>
     </>
   );

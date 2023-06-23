@@ -118,7 +118,6 @@ const Chat = () => {
             className={`${classes.btn} ${classes.backBtn}`}
             onClick={() => {
               setRoom('');
-              console.log('test');
               dispatch(chatActions.closeChooseRoom());
             }}
           >

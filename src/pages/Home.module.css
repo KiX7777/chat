@@ -7,30 +7,6 @@
   align-items: center;
   flex-direction: column;
 }
-.homeContainer select {
-  font-size: 2rem;
-  border: 1px solid #1625f2;
-  border-radius: 0.5rem;
-  position: fixed;
-  right: 1rem;
-  bottom: 1rem;
-}
-
-footer {
-  position: fixed;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
-}
-footer a {
-  text-decoration: none;
-  font-size: 0.8rem;
-  color: black;
-}
-
-footer a:hover {
-  color: #1625f2;
-}
 
 @media screen and (width < 500px) {
   .homeContainer {

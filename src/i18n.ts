@@ -11,7 +11,7 @@ i18n
       escapeValue: false,
     },
     backend: {
-      loadPath: 'http://localhost:5173/i18n/{{lng}}.json',
+      loadPath: '/i18n/{{lng}}.json',
     },
   });
 

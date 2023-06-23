@@ -60,6 +60,7 @@
 }
 .chooseRoom input {
   padding: 1rem;
+  font-size: 1.6rem;
   border-radius: 0.5rem;
   border: 1px solid #1625f2;
 }
@@ -94,6 +95,7 @@
   }
   .chatContainer {
     min-height: calc(100dvh - 3rem);
+    gap: 1rem;
   }
 }
 @media (prefers-color-scheme: dark) {

@@ -11,13 +11,6 @@ const RoomChat = () => {
         <h1 className={classes.room}>{state.room}</h1>
         <h3>
           Online: <p>{state.roomUsers.join(', ')}</p>
-          <button
-            onClick={() => {
-              console.log(state);
-            }}
-          >
-            state
-          </button>
         </h3>
         <Messages messages={state.roomMessages} />
         <ChatForm room={state.room} />
