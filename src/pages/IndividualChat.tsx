@@ -1,16 +1,7 @@
-import { useAppSelector, useAppDispatch } from '../hooks';
-import { logout } from '../Stores/UserSlice';
+import { useAppSelector } from '../hooks';
 import classes from './IndiviudalChat.module.css';
-import {
-  ref,
-  child,
-  onValue,
-  query,
-  orderByValue,
-  set,
-  get,
-} from 'firebase/database';
-import { database, usersRef } from '../firebaseFunctions';
+import { ref, onValue, query, orderByValue, get } from 'firebase/database';
+import { database } from '../firebaseFunctions';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { Message } from '../Components/Chat';
@@ -20,8 +11,6 @@ import ChatForm from '../Components/ChatForm';
 import { useTranslation } from 'react-i18next';
 
 const IndividualChat = () => {
-  const dispatch = useAppDispatch();
-  const user = useAppSelector((state) => state.user);
   const navigate = useNavigate();
   const { id: combinedID } = useParams();
   const { t } = useTranslation();
@@ -89,17 +78,6 @@ const IndividualChat = () => {
           }}
         >
           {t('back')}
-        </button>
-        <button
-          className={classes.logOut}
-          onClick={async () => {
-            const onlineStatusRef = child(usersRef, `${user.id}/online`);
-            await set(onlineStatusRef, false);
-            dispatch(logout());
-            navigate('/');
-          }}
-        >
-          {t('logOut')}
         </button>
       </div>
       <h1>{otherUser?.username}</h1>

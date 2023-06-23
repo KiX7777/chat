@@ -4,6 +4,7 @@ import { useAppDispatch, useAppSelector } from '../hooks';
 import { userActions, logout } from '../Stores/UserSlice';
 import { chatActions } from '../Stores/ChatSlice';
 import i18n from '../i18n';
+import { useTranslation } from 'react-i18next';
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
   const dispatch = useAppDispatch();
@@ -11,6 +12,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
   const room = useAppSelector((state) => state.chat.room);
   const user = useAppSelector((state) => state.user);
   const currentLanguage = useAppSelector((state) => state.user.language);
+  const { t } = useTranslation();
   const onChangeLang = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const lang_code = e.target.value;
     dispatch(userActions.setLanguage(e.target.value));
@@ -38,7 +40,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
               dispatch(chatActions.showConvos());
             }}
           >
-            LOG OUT
+            {t('logOut')}
           </button>
         )}
       </header>

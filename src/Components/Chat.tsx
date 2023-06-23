@@ -7,16 +7,15 @@ import {
   child,
   onValue,
   onDisconnect,
-  remove,
+  
 } from 'firebase/database';
-import { logout, User } from '../Stores/UserSlice';
+import {  User } from '../Stores/UserSlice';
 
 import {
   database,
   roomsRef,
   checkRoom,
-  usersRef,
-  logOutRemove,
+
 } from '../firebaseFunctions';
 import { chatActions } from '../Stores/ChatSlice';
 import Conversations from './Conversations';
@@ -125,6 +124,7 @@ const Chat = () => {
             className={`${classes.btn} ${classes.backBtn}`}
             onClick={() => {
               setRoom('');
+              dispatch(chatActions.setRoom(''));
               dispatch(chatActions.closeChooseRoom());
             }}
           >
