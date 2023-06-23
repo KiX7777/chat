@@ -27,7 +27,6 @@ const Conversations = () => {
     //get all user's individual chats when the component loads
     async function getChats(user: User) {
       const res = await getIndividualChats(user);
-      console.log(res);
       const chats: Chat[] = [];
       for (const convo in res) {
         const chat: Chat = {

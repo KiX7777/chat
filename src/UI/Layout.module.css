@@ -45,4 +45,7 @@ footer a:hover {
   .header img {
     filter: brightness(2) contrast(1.5);
   }
+  .header footer {
+    color: white;
+  }
 }/*# sourceMappingURL=Layout.module.css.map */

@@ -12,10 +12,8 @@ import Layout from './UI/Layout';
 function App() {
   const dispatch = useAppDispatch();
   const user = useAppSelector((state) => state.user);
-  console.log(user);
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
-      console.log(user);
       if (user) {
         dispatch(
           userActions.updateUser({
@@ -24,7 +22,6 @@ function App() {
             id: user?.uid,
           })
         );
-        console.log(user);
         setOnlineStatus(true, {
           username: user?.displayName,
           email: user?.email,
@@ -52,8 +49,6 @@ function App() {
             </>
           )}
         </Routes>
-        {/* <Home /> */}
-  
       </Layout>
     </>
   );

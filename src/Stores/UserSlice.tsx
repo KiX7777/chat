@@ -13,6 +13,8 @@ import {
   sendIndividualMessage,
 } from '../firebaseFunctions';
 import { UserCardProps } from '../Components/UserFinder';
+import { RootState } from './store';
+import { Message } from '../Components/Chat';
 
 export interface User {
   username: string;
@@ -49,10 +51,20 @@ export const login = createAsyncThunk(
       }
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
+      const state = thunkAPI.getState() as RootState;
+
       if (error.message === 'Firebase: Error (auth/wrong-password).') {
-        return thunkAPI.rejectWithValue('Incorrect password');
+        return thunkAPI.rejectWithValue(
+          state.user.language === 'en'
+            ? 'Incorrect password'
+            : 'Netočna lozinka'
+        );
       } else if (error.message === 'Firebase: Error (auth/user-not-found).') {
-        return thunkAPI.rejectWithValue('User not found.');
+        return thunkAPI.rejectWithValue(
+          state.user.language === 'en'
+            ? 'User not found.'
+            : 'Korisnik nije pronađen'
+        );
       } else {
         return thunkAPI.rejectWithValue(error.message);
       }
@@ -73,9 +85,14 @@ export const signUp = createAsyncThunk(
     try {
       //when creating a new account first check it there is an account with the selected username
       const existingUsers = await checkUsername();
+      const state = thunkAPI.getState() as RootState;
 
       if (existingUsers.includes(user.username)) {
-        return thunkAPI.rejectWithValue('Username taken');
+        return thunkAPI.rejectWithValue(
+          state.user.language === 'en'
+            ? 'Username taken'
+            : 'Korisničko ime je zauzeto.'
+        );
       } else {
         const res = await emailSignUp(user.email, user.password);
         if (typeof res === 'string') {
@@ -96,8 +113,14 @@ export const signUp = createAsyncThunk(
       }
     } catch (err: unknown) {
       const error = err as Error;
+      const state = thunkAPI.getState() as RootState;
+
       if (error.message === 'Firebase: Error (auth/email-already-in-use).') {
-        return thunkAPI.rejectWithValue('There is an account with that email.');
+        return thunkAPI.rejectWithValue(
+          state.user.language === 'en'
+            ? 'There is an account with that email.'
+            : 'Već postoji račun s tom email adresom.'
+        );
       } else {
         return thunkAPI.rejectWithValue(error.message);
       }

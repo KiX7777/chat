@@ -56,9 +56,7 @@ setPersistence(auth, browserSessionPersistence);
 export async function emailSignUp(email, password) {
   try {
     const res = await createUserWithEmailAndPassword(auth, email, password);
-    console.log(res);
     const userData = res.user;
-    console.log(userData);
 
     return userData;
   } catch (error) {
@@ -70,10 +68,8 @@ export async function emailLogin(email, password) {
   try {
     const res = await signInWithEmailAndPassword(auth, email, password);
     const userData = res.user;
-    console.log(userData);
     return userData;
   } catch (error) {
-    console.log(error.message);
     return error.message;
   }
 }
@@ -81,7 +77,6 @@ export async function emailLogin(email, password) {
 export async function logOut() {
   signOut(auth)
     .then(() => {
-      console.log('logged out');
       return 'Logged out!';
     })
     .catch((error) => {
@@ -124,7 +119,6 @@ export async function chatExists(user, combinedID) {
   const msgs = [...Object.entries(data)];
   for (const id in msgs) {
     ids.push(msgs[id][0]);
-    console.log(ids);
   }
   const exists = ids.includes(combinedID);
   return exists;
@@ -141,7 +135,6 @@ export const setOnlineStatus = async (status, user) => {
 export const createUser = async (user) => {
   const nodeRef = child(usersRef, `${user.id}`);
 
-  console.log(user);
   await set(nodeRef, user);
   const userChatsRef = child(usersRef, `${user.id}/chats`);
   await set(userChatsRef, false);
@@ -151,7 +144,6 @@ export const createUser = async (user) => {
 //   const roomRef = ref(database, `rooms/${room}`)
 // }
 export async function checkUsername() {
-  console.log('first');
   const usersRef = query(ref(database, 'users'), ...[orderByValue()]);
   const snapshot = await get(usersRef);
   const data = snapshot.val();
@@ -168,7 +160,6 @@ export async function getUsers() {
   onValue(usersRef, (snapshot) => {
     const users = [];
     const data = snapshot.val();
-    console.log(data);
     for (const user in data) {
       users.push(data[user]);
     }

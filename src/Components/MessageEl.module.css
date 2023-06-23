@@ -22,10 +22,11 @@
 .messageContainer h4 {
   width: -moz-fit-content;
   width: fit-content;
+  font-size: 0.8rem;
+  max-width: 10%;
 }
 .messageContainer p {
   flex: 1;
-  width: 30%;
   font-size: 1.4rem;
   overflow-x: auto;
 }
