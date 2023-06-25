@@ -202,11 +202,6 @@ export async function startIndividualChat(sender, receiver, id) {
     ],
     messages: false,
   });
-
-  await set(userChats, {
-    id: sender.id,
-    username: sender.username,
-  });
 }
 
 export async function sendIndividualMessage(

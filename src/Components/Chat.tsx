@@ -1,22 +1,10 @@
 import { useEffect } from 'react';
 import classes from './Chat.module.css';
 import { useState } from 'react';
-import {
-  set,
-  ref,
-  child,
-  onValue,
-  onDisconnect,
-  
-} from 'firebase/database';
-import {  User } from '../Stores/UserSlice';
+import { set, ref, child, onValue, onDisconnect } from 'firebase/database';
+import { User } from '../Stores/UserSlice';
 
-import {
-  database,
-  roomsRef,
-  checkRoom,
-
-} from '../firebaseFunctions';
+import { database, roomsRef, checkRoom } from '../firebaseFunctions';
 import { chatActions } from '../Stores/ChatSlice';
 import Conversations from './Conversations';
 import { useAppSelector, useAppDispatch } from '../hooks';
@@ -116,6 +104,10 @@ const Chat = () => {
 
   return (
     <div className={classes.chatContainer}>
+      {user.loggedIn && (
+        <p className={classes.userGreet}>Hello, {user.username}</p>
+      )}
+
       <UserFinder />
       <div className={classes.btns}>
         {room && (
