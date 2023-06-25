@@ -117,4 +117,7 @@
     color: white;
     background-color: #222;
   }
+  .userCard img {
+    filter: invert(1);
+  }
 }/*# sourceMappingURL=UserFinder.module.css.map */

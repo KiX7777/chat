@@ -117,5 +117,9 @@
   .userCard {
     color: white;
     background-color: #222;
+
+    img {
+      filter: invert(1);
+    }
   }
 }
