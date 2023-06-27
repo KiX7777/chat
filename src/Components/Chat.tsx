@@ -1,8 +1,9 @@
-import { useEffect } from 'react';
+import { ChangeEvent, useEffect, useRef } from 'react';
 import classes from './Chat.module.css';
 import { useState } from 'react';
 import { set, ref, child, onValue, onDisconnect } from 'firebase/database';
 import { User } from '../Stores/UserSlice';
+import { getImg, sendImg } from '../firebaseFunctions';
 
 import { database, roomsRef, checkRoom } from '../firebaseFunctions';
 import { chatActions } from '../Stores/ChatSlice';
@@ -16,6 +17,7 @@ export type Message = {
   sender: string;
   message: string;
   time: object;
+  image?: string;
 };
 
 const Chat = () => {

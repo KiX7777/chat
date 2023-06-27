@@ -11,6 +11,12 @@
   margin-top: auto;
   width: 100%;
 
+  .previewImg {
+    width: 4rem;
+    height: 4rem;
+    object-fit: cover;
+  }
+
   form {
     @include flex(space-between, center);
     width: 100%;
@@ -29,6 +35,13 @@
       height: 70%;
       fill: $primary;
     }
+  }
+
+  .addImg {
+    margin-right: 1rem;
+  }
+  .sendBtn {
+    margin-left: 1rem;
   }
 
   input {
@@ -70,6 +83,9 @@
     }
     input {
       border: 1px solid white;
+    }
+
+    .addImg {
     }
   }
 }

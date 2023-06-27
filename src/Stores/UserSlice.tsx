@@ -172,22 +172,28 @@ export const sendIndMessage = createAsyncThunk(
       currentuser,
       receiverID,
       combinedID,
-      inputMsg,
+      msg,
     }: {
       currentuser: User;
       receiverID: string | undefined;
       combinedID: string | undefined;
-      inputMsg: string;
+      msg: string | { text: string; img: string };
     },
     thunkAPI
   ) => {
     try {
-      await sendIndividualMessage(
-        currentuser,
-        receiverID,
-        combinedID,
-        inputMsg
-      );
+      if (typeof msg == 'object') {
+        console.log(msg.text);
+        await sendIndividualMessage(
+          currentuser,
+          receiverID,
+          combinedID,
+          msg.text,
+          msg.img
+        );
+      } else {
+        await sendIndividualMessage(currentuser, receiverID, combinedID, msg);
+      }
     } catch (err) {
       const error = err as Error;
       thunkAPI.rejectWithValue(error.message);

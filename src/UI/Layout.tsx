@@ -13,7 +13,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
   const user = useAppSelector((state) => state.user);
   const currentLanguage = useAppSelector((state) => state.user.language);
   const { t } = useTranslation();
-  const onChangeLang = (e: React.ChangeEvent<HTMLSelectElement>) => {
+  const onChangeLang = (e: React.ChangeEvent<HTMLSelectElement>): void => {
     const lang_code = e.target.value;
     dispatch(userActions.setLanguage(e.target.value));
     i18n.changeLanguage(lang_code);

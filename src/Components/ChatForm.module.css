@@ -10,6 +10,12 @@
   margin-top: auto;
   width: 100%;
 }
+.newMessageContainer .previewImg {
+  width: 4rem;
+  height: 4rem;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
 .newMessageContainer form {
   display: flex;
   justify-content: space-between;
@@ -28,6 +34,12 @@
   width: 70%;
   height: 70%;
   fill: #1625f2;
+}
+.newMessageContainer .addImg {
+  margin-right: 1rem;
+}
+.newMessageContainer .sendBtn {
+  margin-left: 1rem;
 }
 .newMessageContainer input {
   padding: 1rem;

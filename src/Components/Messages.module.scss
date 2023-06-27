@@ -8,6 +8,44 @@
   gap: 2rem;
 
   overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.imgModal {
+  width: 40rem;
+  height: 40rem;
+  background-color: transparent;
+  position: fixed;
+  left: 50%;
+  background-image: url('/public/hr.webp');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  top: 50%;
+  transition: 400ms;
+  opacity: 0;
+  visibility: hidden;
+  transform: translate(-50%, -50%);
+  z-index: 50;
+}
+.backdrop {
+  width: 100%;
+  left: 0;
+  top: 0;
+  height: 100%;
+  position: fixed;
+  visibility: hidden;
+  opacity: 0;
+  transition: 400ms;
+  content: '';
+  background-color: rgba($color: #000000, $alpha: 0.5);
+  backdrop-filter: blur(4px);
+  z-index: 50;
+}
+
+.open {
+  visibility: visible;
+  opacity: 1;
 }
 
 .messagesContainer::-webkit-scrollbar {
@@ -17,4 +55,14 @@
 .messagesContainer::-webkit-scrollbar-thumb {
   border-left: 6px solid white;
   background-color: $primary;
+}
+
+@keyframes appear {
+}
+
+@media screen and (width <500px) {
+  .imgModal {
+    width: 90%;
+    height: 50%;
+  }
 }

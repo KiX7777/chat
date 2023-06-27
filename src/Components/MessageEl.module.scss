@@ -25,11 +25,36 @@
     max-width: 10%;
   }
 
+  .msgImg {
+    width: 4rem;
+    height: 4rem;
+    transition: 300ms;
+    object-fit: contain;
+  }
+
+  .openImg {
+    transform: scale(10);
+    position: fixed;
+  }
   p {
     flex: 1;
     font-size: 1.4rem;
+    display: flex;
+    align-items: center;
     overflow-x: auto;
+
+    img {
+      margin-left: 2rem;
+    }
   }
+}
+
+.imgModal {
+  width: 30rem;
+  height: 30rem;
+  background-color: red;
+  position: fixed;
+  left: 50%;
 }
 
 @keyframes appear {

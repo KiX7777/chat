@@ -15,6 +15,7 @@ interface Chat {
   messages: Message[];
   interlocutor: string;
   time: string;
+  image?: string;
 }
 
 const Conversations = () => {
@@ -33,6 +34,8 @@ const Conversations = () => {
           id: convo,
           message: Object.entries<Chat>(res[convo].messages).slice(-1)[0][1]
             .message,
+          image: Object.entries<Chat>(res[convo].messages).slice(-1)[0][1]
+            .image,
           time: moment(
             Object.entries<Chat>(res[convo].messages).slice(-1)[0][1].time
           ).format(),
@@ -41,14 +44,13 @@ const Conversations = () => {
             (u: User) => u.username !== user.username
           ).username,
         };
+        console.log(chat);
         chats.push(chat);
       }
       setChats(chats);
     }
 
     getChats(user);
-
-    // return () => {}
   }, [user]);
 
   return (
@@ -58,7 +60,10 @@ const Conversations = () => {
         <Link key={ch.id} to={`chat/${ch.id}`} className={classes.chatCard}>
           <h6>{ch.interlocutor}</h6>
           <div className={classes.lastMsg}>
-            <small className={classes.lastTxt}>{ch.message}</small>
+            <small className={classes.lastTxt}>
+              {ch.message}
+              {ch.image && ' 🌆'}
+            </small>
 
             <small className={classes.lastMsgTime}>
               {`${moment(ch.time).fromNow()}`}

@@ -1,6 +1,19 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { PayloadAction, createSlice } from '@reduxjs/toolkit';
+import { Message } from '../Components/Chat';
 
-const initialState = {
+type ChatState = {
+  chooseRoom: boolean;
+  room: string;
+  seeOnlineUsers: boolean;
+  seeAllUsers: boolean;
+  showConvos: boolean;
+  roomMessages: Message[];
+  roomUsers: string[];
+  imageModal: boolean;
+  modalImage: string;
+};
+
+const initialState: ChatState = {
   chooseRoom: false,
   room: '',
   seeOnlineUsers: false,
@@ -8,6 +21,8 @@ const initialState = {
   showConvos: true,
   roomMessages: [],
   roomUsers: [],
+  imageModal: false,
+  modalImage: '',
 };
 
 export const ChatSlice = createSlice({
@@ -26,13 +41,26 @@ export const ChatSlice = createSlice({
     showChooseRoomBtn(state) {
       state.chooseRoom = true;
     },
+
+    toggleModal(state) {
+      state.imageModal = !state.imageModal;
+    },
+
+    closeModal(state) {
+      state.imageModal = false;
+    },
+
+    setModalImage(state, action: PayloadAction<string>) {
+      state.modalImage = action.payload;
+    },
+
     setRoom(state, action) {
       state.room = action.payload;
     },
-    setRoomUsers(state, action) {
+    setRoomUsers(state, action: PayloadAction<string[]>) {
       state.roomUsers = action.payload;
     },
-    setMessages(state, action) {
+    setMessages(state, action: PayloadAction<Message[]>) {
       state.roomMessages = action.payload;
     },
 

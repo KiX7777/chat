@@ -1,5 +1,10 @@
 import { initializeApp } from 'firebase/app';
-import { getStorage, ref as sRef } from 'firebase/storage';
+import {
+  getStorage,
+  ref as sRef,
+  getDownloadURL,
+  uploadBytesResumable,
+} from 'firebase/storage';
 import {
   get,
   getDatabase,
@@ -41,7 +46,7 @@ export const app = initializeApp(firebaseConfig);
 //____________________________________STORAGE____________________________________
 export const storage = getStorage(app);
 export const storageRef = sRef(storage);
-export const usersStorageRef = sRef(storage, 'users');
+export const chatMessagesImgsRef = sRef(storage, 'chatMessages/images');
 //____________________________________DATABASE____________________________________
 export const database = getDatabase();
 export const usersRef = ref(database, 'users');
@@ -208,20 +213,75 @@ export async function sendIndividualMessage(
   sender,
   receiverID,
   combinedID,
-  message
+  message,
+  image
 ) {
   const receiverRef = ref(database, `users/${receiverID}/chats/${combinedID}`);
   const senderRef = ref(database, `users/${sender.id}/chats/${combinedID}`);
   const childNodeRec = child(receiverRef, `messages/${Date.now()}`);
   const childNodeSend = child(senderRef, `messages/${Date.now()}`);
-  await set(childNodeSend, {
-    sender: sender.username,
-    message: message,
-    time: Date.now(),
+
+  if (image) {
+    await set(childNodeSend, {
+      sender: sender.username,
+      message: message,
+      time: Date.now(),
+      image,
+    });
+    await set(childNodeRec, {
+      sender: sender.username,
+      message: message,
+      time: Date.now(),
+      image,
+    });
+  } else {
+    await set(childNodeSend, {
+      sender: sender.username,
+      message: message,
+      time: Date.now(),
+    });
+    await set(childNodeRec, {
+      sender: sender.username,
+      message: message,
+      time: Date.now(),
+    });
+  }
+}
+
+export async function getImg() {
+  const imgRef = sRef(storage, '/chatMessages/images/hr.webp');
+
+  getDownloadURL(imgRef).then((url) => {
+    console.log(url);
   });
-  await set(childNodeRec, {
-    sender: sender.username,
-    message: message,
-    time: Date.now(),
-  });
+}
+
+export async function sendImg(user, file) {
+  const uploadRef = sRef(
+    storage,
+    `/chatMessages/images/${user.username}/${file.name}`
+  );
+
+  // const next = function (snapshot) {
+  //   const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+  //   console.log(progress);
+  // };
+  // const error = function (error) {
+  //   console.log(error);
+  // };
+  // const complete = async function () {
+  //   const url = await getDownloadURL(uploadTask.snapshot.ref);
+  //   const URL = url;
+  //   console.log(URL);
+  // };
+  try {
+    const uploadTask = uploadBytesResumable(uploadRef, file);
+    const snapshot = await uploadTask;
+    const url = await getDownloadURL(snapshot.ref);
+    return url;
+  } catch (error) {
+    console.log(error.message);
+  }
+
+  // uploadTask.on('state_changed', next, error, complete);
 }

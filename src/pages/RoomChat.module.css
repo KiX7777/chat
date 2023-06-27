@@ -1,5 +1,4 @@
 .roomChatContainer {
-  flex: 1;
   display: flex;
   justify-content: initial;
   align-items: initial;
@@ -19,7 +18,8 @@
 .messagesContainer {
   width: 100%;
   border: 1px solid #1625f2;
-  min-height: 75dvh;
+  max-height: 75dvh;
+  overflow-y: auto;
   border-radius: 0.5rem;
   padding: 1rem;
   gap: 3.2rem;
@@ -83,7 +83,8 @@
     width: 30%;
   }
   .messagesContainer {
-    min-height: 70dvh;
+    max-height: 70dvh;
+    gap: 2.2rem;
   }
 }
 @media (prefers-color-scheme: dark) {

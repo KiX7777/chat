@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import classes from './ChatForm.module.css';
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import { ref, child, set, serverTimestamp } from 'firebase/database';
-import { database,  } from '../firebaseFunctions';
+import { database, sendImg } from '../firebaseFunctions';
 import { Message } from './Chat';
 import { useAppSelector, useAppDispatch } from '../hooks';
 import { sendIndMessage } from '../Stores/UserSlice';
@@ -22,6 +22,27 @@ const ChatForm = ({
   const time = serverTimestamp();
   const dispatch = useAppDispatch();
   const currentuser = useAppSelector((state) => state.user);
+  const [image, setImage] = useState<File>();
+  const [preview, setPreview] = useState<string>();
+  const uploadSelector = useRef<HTMLInputElement>(null);
+
+  async function upload(): Promise<string> {
+    const res = await sendImg(currentuser, image);
+    return res!;
+  }
+  // function download(): void {
+  //   fetch(
+  //     'https://firebasestorage.googleapis.com/v0/b/chatapp-22851.appspot.com/o/chatMessages%2Fimages%2Fhr.webp?alt=media&token=5c4c51de-ebd9-4334-8b29-48ac8b2e3d04'
+  //   )
+  //     .then((res) => res.blob())
+  //     .then((blob) => {
+  //       const url = URL.createObjectURL(blob);
+  //       const link = document.createElement('a');
+  //       link.href = url;
+  //       link.download = 'hrvatska.jpg';
+  //       link.click();
+  //     });
+  // }
 
   const handleSubmit = async () => {
     const inputMsg = inputRef.current?.value as string;
@@ -32,38 +53,134 @@ const ChatForm = ({
       const roomRef = ref(database, `rooms/${room}`);
       //create new message with current time as key
       const nodeRef = child(roomRef, `${date}`);
-      if (inputMsg) {
-        const message: Message = {
-          sender: currentuser.username,
-          time: time,
-          message: inputMsg,
-        };
+      let message;
+
+      if (inputMsg || image) {
+        if (image) {
+          const img = await sendImg(currentuser, image);
+          message = {
+            sender: currentuser.username,
+            time: time,
+            message: inputMsg || '',
+            image: img,
+          };
+        } else {
+          message = {
+            sender: currentuser.username,
+            time: time,
+            message: inputMsg,
+          };
+        }
+
         //send message to the server
         await set(nodeRef, message);
         // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
         inputRef.current!.value = '';
+        uploadSelector.current!.value = '';
+        setImage(undefined);
+        setPreview('');
       }
     } else {
       //if it is individual chat
-      if (inputMsg) {
-        dispatch(
-          sendIndMessage({
-            currentuser,
-            receiverID,
-            combinedID,
-            inputMsg,
-          })
-        );
+      if (inputMsg || image) {
+        if (image) {
+          const img = (await sendImg(currentuser, image)) as string;
+          const msg = {
+            text: inputMsg || '',
+            img,
+          };
+          dispatch(
+            sendIndMessage({
+              currentuser,
+              receiverID,
+              combinedID,
+              msg,
+            })
+          );
+        } else {
+          const msg = inputMsg;
+          dispatch(
+            sendIndMessage({
+              currentuser,
+              receiverID,
+              combinedID,
+              msg,
+            })
+          );
+        }
 
         inputRef.current!.value = '';
+        uploadSelector.current!.value = '';
+        setImage(undefined);
+        setPreview('');
         return;
       }
     }
   };
 
-
   return (
     <div className={classes.newMessageContainer}>
+      {!preview && (
+        <button
+          className={classes.addImg}
+          onClick={() => {
+            uploadSelector.current?.click();
+          }}
+        >
+          <svg
+            fill='#000000'
+            version='1.1'
+            id='Capa_1'
+            width='800px'
+            height='800px'
+            viewBox='0 0 380 380'
+            xmlSpace='preserve'
+          >
+            <g>
+              <g>
+                <g>
+                  <path
+                    d='M370,35.025H10c-5.522,0-10,4.477-10,10v289.949c0,5.522,4.478,10,10,10h360c5.522,0,10-4.478,10-10V45.025
+				C380,39.502,375.522,35.025,370,35.025z M342.285,307.26H37.715V72.74h304.57V307.26z'
+                  />
+                  <path
+                    d='M75.555,283.303h228.891c5.121,0,9.271-4.151,9.271-9.272v-53.155c0-2.42-0.943-4.743-2.637-6.476l-25.474-26.114
+				c-3.475-3.559-9.133-3.745-12.83-0.425l-48.028,43.106l-82.928-75.259c-3.35-3.038-8.398-3.219-11.955-0.428
+				c-11.679,9.165-37.859,29.708-60.033,47.094c-2.241,1.758-3.551,4.448-3.551,7.297v64.358
+				C66.282,279.15,70.434,283.303,75.555,283.303z'
+                  />
+                  <path
+                    d='M227.602,197.822c11.483,0,20.826-9.343,20.826-20.825c0-11.483-9.343-20.825-20.826-20.825
+				c-11.48,0-20.823,9.342-20.823,20.825C206.777,188.479,216.119,197.822,227.602,197.822z'
+                  />
+                </g>
+              </g>
+            </g>
+          </svg>
+        </button>
+      )}
+      <input
+        type='file'
+        ref={uploadSelector}
+        onChange={(e) => {
+          if (!e.target.files) {
+            return;
+          }
+          setImage(e.target.files[0]);
+          setPreview(URL.createObjectURL(e.target.files[0]));
+          // setPreview(e.target.files[0]);
+        }}
+      />
+      {preview && (
+        <img
+          onClick={() => {
+            uploadSelector.current?.click();
+          }}
+          className={classes.previewImg}
+          src={preview}
+          alt='img'
+        />
+      )}
       <form
         onSubmit={(e) => {
           e.preventDefault();
@@ -77,7 +194,7 @@ const ChatForm = ({
           id='message'
           placeholder={t('writeMsg')}
         />
-        <button>
+        <button className={classes.sendBtn}>
           <svg
             fill='#000000'
             height='800px'

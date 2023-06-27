@@ -9,6 +9,7 @@ import Messages from '../Components/Messages';
 import { useNavigate } from 'react-router-dom';
 import ChatForm from '../Components/ChatForm';
 import { useTranslation } from 'react-i18next';
+import { Unsubscribe } from 'firebase/auth';
 
 const IndividualChat = () => {
   const navigate = useNavigate();
@@ -27,7 +28,7 @@ const IndividualChat = () => {
       ref(database, `users/${currentUser.id}/chats/${combinedID}/messages`),
       ...[orderByValue()]
     );
-    async function getMsgs() {
+    async function getMsgs(): Promise<Unsubscribe> {
       const unsubscribe = onValue(chatRef, (snapshot) => {
         const msgs: Message[] = [];
         snapshot.forEach((val) => {
@@ -83,6 +84,8 @@ const IndividualChat = () => {
       <h1>{otherUser?.username}</h1>
 
       <div className={classes.messagesContainer}>
+        {/* <div className={classes.backdrop}></div> */}
+
         <Messages messages={chatMessages} />
         <ChatForm
           combinedID={combinedID as string}

@@ -1,3 +1,7 @@
+.layout {
+  position: relative;
+}
+
 .header {
   height: 5rem;
   position: relative;
@@ -34,7 +38,7 @@
 }
 
 footer {
-  position: fixed;
+  position: absolute;
   bottom: 0;
   left: 50%;
   transform: translateX(-50%);

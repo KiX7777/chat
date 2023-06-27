@@ -2,7 +2,7 @@
 @use '../styles/colors' as *;
 
 .roomChatContainer {
-  flex: 1;
+  // flex: 1;
   @include flex(initial, initial);
 }
 
@@ -20,7 +20,8 @@
 .messagesContainer {
   width: 100%;
   border: 1px solid $primary;
-  min-height: 75dvh;
+  max-height: 75dvh;
+  overflow-y: auto;
   border-radius: 0.5rem;
   padding: 1rem;
 
@@ -68,7 +69,9 @@
     width: 30%;
   }
   .messagesContainer {
-    min-height: 70dvh;
+    // min-height: 70dvh;
+    max-height: 70dvh;
+    gap: 2.2rem;
   }
 }
 
