@@ -1,6 +1,7 @@
 {
   "title": "Chat application",
-  "find": "Find User(s)",
+  "find": "Find Users",
+  "findplaceholder": "Find User...",
   "seeOnline": "See Online Users",
   "hideConvos": "Hide conversations",
   "showConvos": "Show conversations",

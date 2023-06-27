@@ -138,7 +138,7 @@ const UserFinder = () => {
         <>
           <input
             type='text'
-            placeholder='Find user...'
+            placeholder={t('findplaceholder')}
             ref={inputRef}
             onKeyDown={(e) => {
               handleSubmit(e);

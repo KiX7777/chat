@@ -1,8 +1,9 @@
 {
   "title": "Chat aplikacija za razmjenu poruka",
-  "find": "Pronađi",
+  "find": "Pretraga",
   "seeOnline": "Vidi online korisnike",
   "hideConvos": "Sakrij razgovore",
+  "findplaceholder": "Pronađi korisnika",
   "showConvos": "Prikaži razgovore",
   "convos": "Razgovori",
   "noUsers": "Nema korisnika online",

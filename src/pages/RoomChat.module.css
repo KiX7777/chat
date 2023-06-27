@@ -2,6 +2,7 @@
   display: flex;
   justify-content: initial;
   align-items: initial;
+  min-height: 75dvh;
 }
 
 .chatContainer {
@@ -79,6 +80,9 @@
 }
 
 @media screen and (width < 500px) {
+  .roomChatContainer {
+    min-height: 70dvh;
+  }
   .logOut {
     width: 30%;
   }

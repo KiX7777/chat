@@ -44,7 +44,6 @@ const Conversations = () => {
             (u: User) => u.username !== user.username
           ).username,
         };
-        console.log(chat);
         chats.push(chat);
       }
       setChats(chats);

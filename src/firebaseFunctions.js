@@ -183,7 +183,6 @@ export async function getUsers() {
 export async function startIndividualChat(sender, receiver, id) {
   const receiverRef = ref(database, `users/${receiver.id}/chats`);
   const senderRef = ref(database, `users/${sender.id}/chats`);
-  const userChats = ref(database, `userChats/${id}`);
   const childNodeRec = child(receiverRef, `${id}`);
   const childNodeSend = child(senderRef, `${id}`);
 

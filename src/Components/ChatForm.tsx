@@ -3,7 +3,6 @@ import classes from './ChatForm.module.css';
 import { useRef, useState } from 'react';
 import { ref, child, set, serverTimestamp } from 'firebase/database';
 import { database, sendImg } from '../firebaseFunctions';
-import { Message } from './Chat';
 import { useAppSelector, useAppDispatch } from '../hooks';
 import { sendIndMessage } from '../Stores/UserSlice';
 import { useTranslation } from 'react-i18next';
@@ -25,24 +24,6 @@ const ChatForm = ({
   const [image, setImage] = useState<File>();
   const [preview, setPreview] = useState<string>();
   const uploadSelector = useRef<HTMLInputElement>(null);
-
-  async function upload(): Promise<string> {
-    const res = await sendImg(currentuser, image);
-    return res!;
-  }
-  // function download(): void {
-  //   fetch(
-  //     'https://firebasestorage.googleapis.com/v0/b/chatapp-22851.appspot.com/o/chatMessages%2Fimages%2Fhr.webp?alt=media&token=5c4c51de-ebd9-4334-8b29-48ac8b2e3d04'
-  //   )
-  //     .then((res) => res.blob())
-  //     .then((blob) => {
-  //       const url = URL.createObjectURL(blob);
-  //       const link = document.createElement('a');
-  //       link.href = url;
-  //       link.download = 'hrvatska.jpg';
-  //       link.click();
-  //     });
-  // }
 
   const handleSubmit = async () => {
     const inputMsg = inputRef.current?.value as string;
