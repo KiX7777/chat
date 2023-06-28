@@ -19,7 +19,6 @@ export interface UserCardProps {
 export const UserCard = ({ user }: { user: UserCardProps }) => {
   const currentUser = useAppSelector((state) => state.user);
   const navigate = useNavigate();
-  const chatState = useAppSelector((state) => state.chat);
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
 
