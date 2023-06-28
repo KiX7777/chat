@@ -92,6 +92,7 @@ const Login = () => {
                 <input
                   type='username'
                   ref={nameRef}
+                  autoComplete='off'
                   id='username'
                   {...formik.getFieldProps('username')}
                 />
@@ -119,6 +120,7 @@ const Login = () => {
               <input
                 type='email'
                 id='emailLogin'
+                autoComplete='off'
                 {...formik.getFieldProps('email')}
               />
               {formik.errors.email && formik.touched.email ? (
@@ -131,6 +133,7 @@ const Login = () => {
               </label>
               <input
                 type='password'
+                autoComplete='off'
                 id='passwordcheck'
                 {...formik.getFieldProps('password')}
               />

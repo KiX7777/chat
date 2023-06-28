@@ -51,6 +51,7 @@ export const UserCard = ({ user }: { user: UserCardProps }) => {
               );
               navigate(`/chat/${combinedID}`);
             }
+            dispatch(chatActions.setRoom(''));
           }}
         >
           {t('message')}

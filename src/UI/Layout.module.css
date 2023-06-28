@@ -1,13 +1,23 @@
 .layout {
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
   position: relative;
 }
 
 .header {
   height: 5rem;
   position: relative;
+  padding: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
-.header img {
-  width: 100%;
+.header a {
+  text-align: center;
+}
+.header a img {
+  width: 50%;
   height: 100%;
   -o-object-fit: contain;
      object-fit: contain;
@@ -16,9 +26,6 @@
   font-size: 2rem;
   border: 1px solid #1625f2;
   border-radius: 0.5rem;
-  position: absolute;
-  left: 0.5rem;
-  top: 0.5rem;
 }
 .header .logOut {
   width: 100%;
@@ -31,17 +38,10 @@
   border-radius: 0.5rem;
   font-family: inherit;
   width: 10%;
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  right: 1rem;
 }
 
 footer {
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
+  text-align: center;
 }
 footer a {
   text-decoration: none;

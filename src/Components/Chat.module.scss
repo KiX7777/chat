@@ -4,12 +4,12 @@
 .chatContainer {
   border-radius: 0.5rem;
   width: 100%;
-  min-height: calc(100dvh - 5rem);
   flex-direction: column;
   display: flex;
+  flex: 1;
   justify-items: center;
   padding: 1rem;
-  gap: 2rem;
+  gap: 1rem;
 }
 
 .userGreet {
