@@ -1,4 +1,4 @@
-import { useAppSelector } from '../hooks';
+import { useAppDispatch, useAppSelector } from '../hooks';
 import classes from './IndiviudalChat.module.css';
 import { ref, onValue, query, orderByValue, get } from 'firebase/database';
 import { database } from '../firebaseFunctions';
@@ -9,11 +9,13 @@ import Messages from '../Components/Messages';
 import { useNavigate } from 'react-router-dom';
 import ChatForm from '../Components/ChatForm';
 import { useTranslation } from 'react-i18next';
+import { chatActions } from '../Stores/ChatSlice';
 import { Unsubscribe } from 'firebase/auth';
 
 const IndividualChat = () => {
   const navigate = useNavigate();
   const { id: combinedID } = useParams();
+  const dispatch = useAppDispatch();
   const { t } = useTranslation();
   const [chatMessages, setchatMessages] = useState<Message[]>([]);
   const currentUser = useAppSelector((state) => state.user);
@@ -76,6 +78,8 @@ const IndividualChat = () => {
           className={classes.backBtn}
           onClick={() => {
             navigate(-1);
+            dispatch(chatActions.setRoom(''));
+            dispatch(chatActions.closeChooseRoom());
           }}
         >
           {t('back')}
