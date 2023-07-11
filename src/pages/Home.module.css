@@ -1,7 +1,7 @@
 .homeContainer {
   width: 100%;
-  min-height: calc(100dvh - 5rem);
   position: relative;
+  flex: 1;
   display: flex;
   justify-content: center;
   align-items: center;

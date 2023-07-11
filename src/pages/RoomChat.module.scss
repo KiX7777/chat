@@ -4,7 +4,7 @@
 .roomChatContainer {
   // flex: 1;
   @include flex(initial, initial);
-  min-height: 75dvh;
+  max-height: 70dvh;
 }
 
 .chatContainer {
@@ -12,6 +12,7 @@
   overflow: hidden;
   width: 100%;
   height: 100%;
+  flex: 1;
   flex-direction: column;
   display: flex;
   justify-items: center;
@@ -21,7 +22,8 @@
 .messagesContainer {
   width: 100%;
   border: 1px solid $primary;
-  max-height: 75dvh;
+  max-height: 70dvh;
+  flex: 1;
   overflow-y: auto;
   border-radius: 0.5rem;
   padding: 1rem;

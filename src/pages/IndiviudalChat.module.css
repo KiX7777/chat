@@ -4,9 +4,9 @@
   border-radius: 0.5rem;
   gap: 2rem;
   align-items: center;
-  height: calc(100dvh - 5rem);
   width: 100%;
   padding: 2rem;
+  flex: 1;
 }
 
 .btns {
@@ -75,7 +75,6 @@
 @media screen and (width < 500px) {
   .chatContainer {
     gap: 1rem;
-    min-height: calc(100dvh - 3rem);
   }
   .btns {
     width: 100%;

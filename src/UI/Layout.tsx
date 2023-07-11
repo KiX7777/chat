@@ -12,7 +12,6 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
   const room = useAppSelector((state) => state.chat.room);
   const user = useAppSelector((state) => state.user);
   const currentLanguage = useAppSelector((state) => state.user.language);
-  const state = useAppSelector((state) => state.chat);
   const { t } = useTranslation();
   const onChangeLang = (e: React.ChangeEvent<HTMLSelectElement>): void => {
     const lang_code = e.target.value;
@@ -23,13 +22,6 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
   return (
     <div className={classes.layout}>
       <header className={classes.header}>
-        <button
-          onClick={() => {
-            console.log(state);
-          }}
-        >
-          STATE
-        </button>
         <Link
           to={'/'}
           onClick={() => {
