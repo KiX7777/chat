@@ -1,14 +1,13 @@
-import './App.css';
 import Home from './pages/Home';
 import { useEffect } from 'react';
-import { auth, setOnlineStatus } from './firebaseFunctions';
+import { auth, setOnlineStatus } from './utilities/firebaseFunctions';
 import { useAppDispatch, useAppSelector } from './hooks';
 import { onAuthStateChanged } from 'firebase/auth';
 import { Routes, Route } from 'react-router-dom';
 import { userActions } from './Stores/UserSlice';
-
 import IndividualChat from './pages/IndividualChat';
 import Layout from './UI/Layout';
+
 function App() {
   const dispatch = useAppDispatch();
   const user = useAppSelector((state) => state.user);

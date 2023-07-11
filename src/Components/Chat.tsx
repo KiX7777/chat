@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { set, ref, child, onValue, onDisconnect } from 'firebase/database';
 import { User } from '../Stores/UserSlice';
 
-import { database, roomsRef, checkRoom } from '../firebaseFunctions';
+import { database, roomsRef, checkRoom } from '../utilities/firebaseFunctions';
 import { chatActions } from '../Stores/ChatSlice';
 import Conversations from './Conversations';
 import { useAppSelector, useAppDispatch } from '../hooks';
@@ -164,25 +164,10 @@ const Chat = () => {
             }}
           />
           <button className={classes.btn}>{t('enterRoom')}</button>
-          {/* <button className={classes.btn}> {t('enterRoom')}</button> */}
         </form>
       )}
 
       {rm && <RoomChat />}
-      {/* <button
-        className={classes.logOut}
-        onClick={async () => {
-          // const roomUsersRef = ref(database, `rooms/${room}/users/${user.id}`);
-          // await remove(roomUsersRef);
-          // const onlineStatusRef = child(usersRef, `${user.id}/online`);
-          // await set(onlineStatusRef, false);
-          // setRoom('');
-          dispatch(chatActions.setRoom(''));
-          dispatch(logout({ room, user }));
-        }}
-      >
-        {t('logOut')}
-      </button> */}
     </div>
   );
 };

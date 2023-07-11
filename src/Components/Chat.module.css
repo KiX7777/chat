@@ -84,7 +84,6 @@ input[type=file] {
     width: 70%;
   }
   .chatContainer {
-    min-height: calc(100dvh - 3rem);
     gap: 1rem;
   }
 }

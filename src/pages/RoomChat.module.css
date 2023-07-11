@@ -2,7 +2,8 @@
   display: flex;
   justify-content: initial;
   align-items: initial;
-  max-height: 70dvh;
+  max-height: 65dvh;
+  flex: 1;
 }
 
 .chatContainer {
@@ -20,13 +21,11 @@
 .messagesContainer {
   width: 100%;
   border: 1px solid #1625f2;
-  max-height: 70dvh;
   flex: 1;
   overflow-y: auto;
   border-radius: 0.5rem;
   padding: 1rem;
   gap: 3.2rem;
-  flex: 1;
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
@@ -83,13 +82,13 @@
 
 @media screen and (width < 500px) {
   .roomChatContainer {
-    min-height: 70dvh;
+    flex: 1;
+    max-height: 65vh;
   }
   .logOut {
     width: 30%;
   }
   .messagesContainer {
-    max-height: 70dvh;
     gap: 2.2rem;
   }
 }

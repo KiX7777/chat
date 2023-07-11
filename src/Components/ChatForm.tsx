@@ -2,7 +2,7 @@
 import classes from './ChatForm.module.css';
 import { useRef, useState } from 'react';
 import { ref, child, set, serverTimestamp } from 'firebase/database';
-import { database, sendImg } from '../firebaseFunctions';
+import { database, sendImg } from '../utilities/firebaseFunctions';
 import { useAppSelector, useAppDispatch } from '../hooks';
 import { sendIndMessage } from '../Stores/UserSlice';
 import { useTranslation } from 'react-i18next';

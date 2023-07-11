@@ -1,5 +1,5 @@
 import classes from './Conversations.module.css';
-import { getIndividualChats } from '../firebaseFunctions';
+import { getIndividualChats } from '../utilities/firebaseFunctions';
 import { useEffect, useState, useRef } from 'react';
 import { useAppSelector } from '../hooks';
 import { Message } from './Chat';

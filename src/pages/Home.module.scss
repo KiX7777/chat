@@ -3,15 +3,8 @@
 
 .homeContainer {
   width: 100%;
-  // min-height: calc(100dvh - 5rem);
   position: relative;
   flex: 1;
   @include flex(center, center);
   flex-direction: column;
-}
-
-@media screen and (width <500px) {
-  .homeContainer {
-    min-height: calc(100dvh - 3rem);
-  }
 }

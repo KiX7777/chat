@@ -12,7 +12,7 @@ import {
   startIndividualChat,
   sendIndividualMessage,
   logOutRemove,
-} from '../firebaseFunctions';
+} from '../utilities/firebaseFunctions';
 import { UserCardProps } from '../Components/UserFinder';
 import { RootState } from './store';
 

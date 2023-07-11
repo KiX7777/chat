@@ -24,7 +24,6 @@
   height: 100%;
   padding: 1rem;
   gap: 3.2rem;
-  // height: 70dvh;
   flex: 1;
   @include flex(space-between, flex-start);
   flex-direction: column;
@@ -82,7 +81,6 @@ input[type='file'] {
   }
 
   .chatContainer {
-    min-height: calc(100dvh - 3rem);
     gap: 1rem;
   }
 }

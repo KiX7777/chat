@@ -4,7 +4,7 @@ import { Formik } from 'formik';
 import * as Yup from 'yup';
 import { useAppDispatch, useAppSelector } from '../hooks';
 import { login, signUp } from '../Stores/UserSlice';
-import { generateName } from '../helpers';
+import { generateName } from '../utilities/helpers';
 import { useTranslation } from 'react-i18next';
 
 export interface User {

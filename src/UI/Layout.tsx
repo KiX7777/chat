@@ -31,10 +31,12 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
         >
           <img src='/logo.webp' alt='Chatter logo' />
         </Link>
-        <select onChange={onChangeLang} value={currentLanguage} id='language'>
-          <option value='hr'>🇭🇷</option>
-          <option value='en'>🇬🇧</option>
-        </select>
+        {!user.loggedIn && (
+          <select onChange={onChangeLang} value={currentLanguage} id='language'>
+            <option value='hr'>🇭🇷</option>
+            <option value='en'>🇬🇧</option>
+          </select>
+        )}
         {user.loggedIn && (
           <button
             className={classes.logOut}

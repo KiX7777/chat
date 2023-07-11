@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import React from 'react';
 import classes from './UserFinder.module.css';
-import { database, chatExists } from '../firebaseFunctions';
+import { database, chatExists } from '../utilities/firebaseFunctions';
 import { useRef, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ref, orderByValue, query, onValue } from 'firebase/database';
@@ -19,7 +19,6 @@ export interface UserCardProps {
 export const UserCard = ({ user }: { user: UserCardProps }) => {
   const currentUser = useAppSelector((state) => state.user);
   const navigate = useNavigate();
-  const chatState = useAppSelector((state) => state.chat);
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
 

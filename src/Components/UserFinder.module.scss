@@ -83,13 +83,12 @@
   height: 2px;
   background-color: green;
   z-index: 1;
-  // box-shadow: 2px 5px 6px rgba($color: #04b41b, $alpha: 0.4);
 }
 
 @media screen and (width < 500px) {
   .userFinder {
     width: 100%;
-    margin-top: 5rem;
+    margin-top: 3rem;
   }
 }
 

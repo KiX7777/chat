@@ -1,7 +1,7 @@
 import { useAppDispatch, useAppSelector } from '../hooks';
 import classes from './IndiviudalChat.module.css';
 import { ref, onValue, query, orderByValue, get } from 'firebase/database';
-import { database } from '../firebaseFunctions';
+import { database } from '../utilities/firebaseFunctions';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { Message } from '../Components/Chat';
@@ -88,8 +88,6 @@ const IndividualChat = () => {
       <h1>{otherUser?.username}</h1>
 
       <div className={classes.messagesContainer}>
-        {/* <div className={classes.backdrop}></div> */}
-
         <Messages messages={chatMessages} />
         <ChatForm
           combinedID={combinedID as string}
