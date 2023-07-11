@@ -23,13 +23,6 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
   return (
     <div className={classes.layout}>
       <header className={classes.header}>
-        <button
-          onClick={() => {
-            console.log(state);
-          }}
-        >
-          STATE
-        </button>
         <Link
           to={'/'}
           onClick={() => {

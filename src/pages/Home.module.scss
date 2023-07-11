@@ -3,8 +3,9 @@
 
 .homeContainer {
   width: 100%;
-  min-height: calc(100dvh - 5rem);
+  // min-height: calc(100dvh - 5rem);
   position: relative;
+  flex: 1;
   @include flex(center, center);
   flex-direction: column;
 }
