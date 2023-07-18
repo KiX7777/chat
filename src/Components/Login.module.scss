@@ -2,11 +2,12 @@
 @use '../styles/mixins' as *;
 
 .loginContainer {
+  margin-top: 6rem;
   display: grid;
   align-items: center;
   justify-content: center;
   padding: 2rem;
-  justify-content: initial;
+  justify-content: center;
   width: 100%;
   h1 {
     text-align: center;
@@ -18,13 +19,13 @@
   width: 100%;
   flex-direction: column;
   gap: 2rem;
-  max-width: 60rem;
+  width: 60rem;
   justify-self: center;
   align-self: baseline;
 
   label {
     font-size: 1.8rem;
-    animation: appear 400ms ease forwards;
+    // animation: appear 400ms ease forwards;
   }
   .randomName {
     background-color: $primary;
@@ -42,7 +43,7 @@
     width: 100%;
     color: var(--font-color);
     background-color: var(--backgroundColor);
-    animation: appear 400ms ease forwards;
+    // animation: appear 400ms ease forwards;
     padding: 0.8rem 1rem;
     border: 1px solid $primary;
   }
@@ -69,10 +70,6 @@
 .loginBtn,
 .loginBtns {
   @include btn;
-}
-
-.loginBtn.error {
-  background-color: red;
 }
 
 .loginBtn:hover,
@@ -105,19 +102,19 @@
 
 .loginSwitch {
   width: 100%;
-  margin-bottom: 2rem;
+  max-width: 60rem;
+  margin-bottom: 4rem;
   display: grid;
-  grid-template-columns: 1fr 0.5fr 1fr;
+  grid-template-columns: repeat(3, 1fr);
   grid-template-rows: none;
   align-items: center;
 
   label {
     font-size: 2rem;
-    justify-self: end;
   }
 
   label:last-of-type {
-    justify-self: baseline;
+    text-align: right;
   }
 
   input {

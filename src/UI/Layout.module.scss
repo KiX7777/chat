@@ -6,6 +6,18 @@
   display: flex;
   flex-direction: column;
   position: relative;
+
+  .errorMsg {
+    position: absolute;
+    top: 5rem;
+    width: 100%;
+    background-color: red;
+    height: 3rem;
+    font-size: 1.4rem;
+    color: white;
+    text-align: center;
+    @include flex(center, center);
+  }
 }
 
 .header {

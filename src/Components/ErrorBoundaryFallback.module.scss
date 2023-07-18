@@ -1,0 +1,13 @@
+@use '../styles/mixins' as *;
+
+.container {
+  width: 100%;
+  height: 100dvh;
+  display: grid;
+  place-content: center;
+
+  button {
+    @include btn();
+    margin-top: 2rem;
+  }
+}

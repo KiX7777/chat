@@ -5,6 +5,7 @@ import { userActions, logout } from '../Stores/UserSlice';
 import { chatActions } from '../Stores/ChatSlice';
 import i18n from '../i18n';
 import { useTranslation } from 'react-i18next';
+import { AnimatePresence, motion } from 'framer-motion';
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
   const dispatch = useAppDispatch();
@@ -21,6 +22,18 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
 
   return (
     <div className={classes.layout}>
+      {user.error && (
+        <AnimatePresence>
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className={classes.errorMsg}
+          >
+            {user.error}
+          </motion.div>
+        </AnimatePresence>
+      )}
       <header className={classes.header}>
         <Link
           to={'/'}

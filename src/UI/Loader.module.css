@@ -1,0 +1,18 @@
+.loader {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  translate: -50% -50%;
+}
+.loader span {
+  background-color: #1625f2 !important;
+  width: 3.5rem !important;
+  height: 3.5rem !important;
+}
+
+@media screen and (width < 500px) {
+  .loader span {
+    width: 2.4rem !important;
+    height: 2.4rem !important;
+  }
+}/*# sourceMappingURL=Loader.module.css.map */

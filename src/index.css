@@ -31,3 +31,12 @@ html {
   --inputcolor: #fefefe;
   --secondary-font-color: #efefef;
 }
+
+body::-webkit-scrollbar {
+  width: 1rem;
+}
+
+body::-webkit-scrollbar-thumb {
+  background-color: #24485e;
+  border-radius: 1rem;
+}

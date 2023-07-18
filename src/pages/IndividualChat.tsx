@@ -11,6 +11,8 @@ import ChatForm from '../Components/ChatForm';
 import { useTranslation } from 'react-i18next';
 import { chatActions } from '../Stores/ChatSlice';
 import { Unsubscribe } from 'firebase/auth';
+import { PageVariants } from '../utilities/helpers';
+import { motion } from 'framer-motion';
 
 const IndividualChat = () => {
   const navigate = useNavigate();
@@ -71,7 +73,13 @@ const IndividualChat = () => {
   }, [combinedID, currentUser.id]);
 
   return (
-    <div className={classes.chatContainer}>
+    <motion.div
+      variants={PageVariants}
+      animate='visible'
+      initial='hidden'
+      exit='exit'
+      className={classes.chatContainer}
+    >
       <div className={classes.btns}>
         <button
           type='button'
@@ -94,7 +102,7 @@ const IndividualChat = () => {
           receiverID={otherUser?.id}
         />
       </div>
-    </div>
+    </motion.div>
   );
 };
 

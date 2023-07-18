@@ -4,7 +4,7 @@
 .roomChatContainer {
   // flex: 1;
   @include flex(initial, initial);
-  max-height: 65dvh;
+  max-height: 80dvh;
   flex: 1;
 }
 
@@ -68,7 +68,7 @@
 @media screen and (width < 500px) {
   .roomChatContainer {
     flex: 1;
-    max-height: 65vh;
+    max-height: 70vh;
   }
 
   .logOut {

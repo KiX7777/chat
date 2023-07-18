@@ -1,0 +1,1 @@
+{"version":3,"sources":["ErrorBoundaryFallback.module.scss","ErrorBoundaryFallback.module.css","../styles/_mixins.scss","../styles/_colors.scss"],"names":[],"mappings":"AAEA;EACE,WAAA;EACA,cAAA;EACA,aAAA;EACA,qBAAA;ACDF;ADGE;EECA,WAAA;EACA,eAAA;EACA,eAAA;EACA,iBAAA;EACA,yBCbQ;EDcR,YAAA;EACA,kCAAA;EACA,qBAAA;EACA,oBAAA;EFPE,gBAAA;ACOJ","file":"ErrorBoundaryFallback.module.css"}

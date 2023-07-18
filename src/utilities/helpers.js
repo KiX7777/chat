@@ -1,9 +1,9 @@
 function capFirst(string) {
-  return string.charAt(0).toUpperCase() + string.slice(1)
+  return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
 function getRandomInt(min, max) {
-  return Math.floor(Math.random() * (max - min)) + min
+  return Math.floor(Math.random() * (max - min)) + min;
 }
 
 export function generateName() {
@@ -1356,7 +1356,7 @@ export function generateName() {
     'zesty',
     'zigzag',
     'rocky',
-  ]
+  ];
 
   var name2 = [
     'people',
@@ -2860,11 +2860,32 @@ export function generateName() {
     'Thomas',
     'Tom',
     'Lieuwe',
-  ]
+  ];
 
   var name =
     capFirst(name1[getRandomInt(0, name1.length + 1)]) +
     ' ' +
-    capFirst(name2[getRandomInt(0, name2.length + 1)])
-  return name
+    capFirst(name2[getRandomInt(0, name2.length + 1)]);
+  return name;
 }
+
+export const PageVariants = {
+  hidden: {
+    opacity: 0,
+    x: '-100%',
+  },
+  visible: {
+    opacity: 1,
+    x: '0',
+    transition: {
+      duration: 0.3,
+    },
+  },
+  exit: {
+    opacity: 0,
+    x: '-100%',
+    transition: {
+      duration: 0.1,
+    },
+  },
+};

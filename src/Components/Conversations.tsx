@@ -6,6 +6,7 @@ import { Message } from './Chat';
 import { User } from '../Stores/UserSlice';
 import 'moment/dist/locale/hr';
 import moment from 'moment';
+import { motion } from 'framer-motion';
 
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
@@ -17,6 +18,27 @@ interface Chat {
   time: string;
   image?: string;
 }
+
+const containerVariants = {
+  hidden: {
+    opacity: 0,
+    scale: 0,
+  },
+  visible: {
+    opacity: 1,
+    scale: 1,
+    transition: {
+      duration: 0.4,
+    },
+  },
+  exit: {
+    opacity: 0,
+    scale: 0,
+    transition: {
+      duration: 0.4,
+    },
+  },
+};
 
 const Conversations = () => {
   const user = useAppSelector((state) => state.user);
@@ -53,7 +75,16 @@ const Conversations = () => {
   }, [user]);
 
   return (
-    <div ref={dref} className={classes.conversationsContainer}>
+    <motion.div
+      key={'convos'}
+      variants={containerVariants}
+      initial='hidden'
+      animate='visible'
+      exit='exit'
+      layout
+      ref={dref}
+      className={classes.conversationsContainer}
+    >
       <h1>{t('convos')}</h1>
       {chats.map((ch) => (
         <Link key={ch.id} to={`chat/${ch.id}`} className={classes.chatCard}>
@@ -63,14 +94,13 @@ const Conversations = () => {
               {ch.message}
               {ch.image && ' 🌆'}
             </small>
-
             <small className={classes.lastMsgTime}>
               {`${moment(ch.time).fromNow()}`}
             </small>
           </div>
         </Link>
       ))}
-    </div>
+    </motion.div>
   );
 };
 

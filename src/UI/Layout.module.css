@@ -4,6 +4,19 @@
   flex-direction: column;
   position: relative;
 }
+.layout .errorMsg {
+  position: absolute;
+  top: 5rem;
+  width: 100%;
+  background-color: red;
+  height: 3rem;
+  font-size: 1.4rem;
+  color: white;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
 .header {
   height: 5rem;

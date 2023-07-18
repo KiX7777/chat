@@ -11,6 +11,7 @@ import { useAppSelector, useAppDispatch } from '../hooks';
 import UserFinder from './UserFinder';
 import RoomChat from '../pages/RoomChat';
 import { useTranslation } from 'react-i18next';
+import { AnimatePresence, motion } from 'framer-motion';
 
 export type Message = {
   sender: string;
@@ -144,28 +145,32 @@ const Chat = () => {
       >
         {showConvos ? t('hideConvos') : t('showConvos')}
       </button>
-      {showConvos && <Conversations />}
+      <AnimatePresence mode='popLayout'>
+        {showConvos && <Conversations key={'convos'} />}
 
-      {!chooseRoom && (
-        <form
-          className={classes.chooseRoom}
-          onSubmit={(e) => {
-            e.preventDefault();
-            handleSubmit();
-            setInput('');
-          }}
-        >
-          <input
-            type='text'
-            placeholder={t('selectRoom')}
-            value={input}
-            onChange={(e) => {
-              setInput(e.target.value);
+        {!chooseRoom && (
+          <motion.form
+            key={'formroom'}
+            layout
+            className={classes.chooseRoom}
+            onSubmit={(e) => {
+              e.preventDefault();
+              handleSubmit();
+              setInput('');
             }}
-          />
-          <button className={classes.btn}>{t('enterRoom')}</button>
-        </form>
-      )}
+          >
+            <input
+              type='text'
+              placeholder={t('selectRoom')}
+              value={input}
+              onChange={(e) => {
+                setInput(e.target.value);
+              }}
+            />
+            <button className={classes.btn}>{t('enterRoom')}</button>
+          </motion.form>
+        )}
+      </AnimatePresence>
 
       {rm && <RoomChat />}
     </div>

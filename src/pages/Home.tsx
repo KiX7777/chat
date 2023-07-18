@@ -1,17 +1,23 @@
 import classes from './Home.module.css';
 import Chat from '../Components/Chat';
-import Login from '../Components/Login';
 import { useAppSelector } from '../hooks';
+import { motion } from 'framer-motion';
+import { PageVariants } from '../utilities/helpers';
 
 const Home = () => {
   const user = useAppSelector((state) => state.user);
 
   return (
-    <div className={classes.homeContainer}>
-      {!user.loggedIn && <Login />}
-      {user.loggedIn && <Chat />}
+    <motion.div
+      variants={PageVariants}
+      animate='visible'
+      initial='hidden'
+      exit='exit'
+      className={classes.homeContainer}
+    >
+      <Chat />
       {user.error && <h1>{user.error}</h1>}
-    </div>
+    </motion.div>
   );
 };
 

@@ -6,6 +6,15 @@ import { useAppDispatch, useAppSelector } from '../hooks';
 import { login, signUp } from '../Stores/UserSlice';
 import { generateName } from '../utilities/helpers';
 import { useTranslation } from 'react-i18next';
+import { AnimatePresence, motion } from 'framer-motion';
+
+const formVariants = {
+  hidden: {
+    opacity: 0,
+  },
+  visible: { opacity: 1 },
+  exit: { opacity: 0 },
+};
 
 export interface User {
   username: string;
@@ -52,13 +61,15 @@ const Login = () => {
             username
               ? Yup.string()
               : Yup.string()
-                  .required('You must provide a username')
+                  .required(t('usernameRequired'))
                   .matches(specialRegex)
           ),
-          email: Yup.string().required('Email is required').matches(emailRegex),
+          email: Yup.string()
+            .required(t('emailRequired'))
+            .matches(emailRegex, t('emailIncorrect')),
           password: Yup.string()
-            .required('You must provide a password')
-            .min(6, 'Must be at least six characters long'),
+            .required(t('passwordRequired'))
+            .min(6, t('passwordInvalid')),
         })}
         onSubmit={(values, { resetForm }) => {
           const user = {
@@ -72,11 +83,12 @@ const Login = () => {
             resetForm();
           } else {
             if (userState.loggedIn) {
-              alert('User is already logged in.');
+              alert(t('alreadyLogged'));
               return;
             }
             dispatch(login(user));
             resetForm();
+            // navigate('/');
 
             return;
           }
@@ -84,36 +96,54 @@ const Login = () => {
       >
         {(formik) => (
           <form className={classes.login} onSubmit={formik.handleSubmit}>
-            {!loginMode && (
-              <div className={classes.fieldContainer}>
-                <label htmlFor='username' placeholder='Your username'>
-                  {t('username')}
-                </label>
-                <input
-                  type='username'
-                  ref={nameRef}
-                  autoComplete='off'
-                  id='username'
-                  {...formik.getFieldProps('username')}
-                />
-                <button
-                  className={classes.randomName}
-                  type='button'
-                  onClick={() => {
-                    const name = generateName();
-                    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-                    nameRef.current!.value = name;
-                    formik.values.username = name;
-                  }}
+            <AnimatePresence mode='popLayout'>
+              {!loginMode && (
+                <motion.div
+                  initial='hidden'
+                  animate='visible'
+                  key='usernameForm'
+                  exit='exit'
+                  layout
+                  variants={formVariants}
+                  className={classes.fieldContainer}
                 >
-                  {t('randomUsername')}
-                </button>
-                {formik.errors.username && formik.touched.username ? (
-                  <p className={classes.error}>{formik.errors.username}</p>
-                ) : null}
-              </div>
-            )}
-            <div className={classes.fieldContainer}>
+                  <label htmlFor='username' placeholder='Your username'>
+                    {t('username')}
+                  </label>
+                  <input
+                    type='username'
+                    ref={nameRef}
+                    autoComplete='off'
+                    id='username'
+                    {...formik.getFieldProps('username')}
+                  />
+                  <button
+                    className={classes.randomName}
+                    type='button'
+                    onClick={() => {
+                      const name = generateName();
+                      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+                      nameRef.current!.value = name;
+                      formik.values.username = name;
+                    }}
+                  >
+                    {t('randomUsername')}
+                  </button>
+                  {formik.errors.username && formik.touched.username ? (
+                    <p className={classes.error}>{formik.errors.username}</p>
+                  ) : null}
+                </motion.div>
+              )}
+            </AnimatePresence>
+            <motion.div
+              initial='hidden'
+              animate='visible'
+              key='emailForm'
+              layout
+              exit='exit'
+              variants={formVariants}
+              className={classes.fieldContainer}
+            >
               <label htmlFor='emailLogin' placeholder='Your email'>
                 Email
               </label>
@@ -124,10 +154,18 @@ const Login = () => {
                 {...formik.getFieldProps('email')}
               />
               {formik.errors.email && formik.touched.email ? (
-                <p className={classes.error}>Email is not valid</p>
+                <p className={classes.error}>{formik.errors.email}</p>
               ) : null}
-            </div>
-            <div className={classes.fieldContainer}>
+            </motion.div>
+            <motion.div
+              initial='hidden'
+              animate='visible'
+              key='passwordForm'
+              layout
+              exit='exit'
+              variants={formVariants}
+              className={classes.fieldContainer}
+            >
               <label htmlFor='passwordcheck' placeholder='Your password'>
                 {t('password')}
               </label>
@@ -140,17 +178,10 @@ const Login = () => {
               {formik.errors.password && formik.touched.password ? (
                 <p className={classes.error}>{formik.errors.password}</p>
               ) : null}
-            </div>
+            </motion.div>
 
             <div className={classes.btns}>
-              <button
-                className={
-                  userState.error
-                    ? `${classes.loginBtn} ${classes.error}`
-                    : `${classes.loginBtn}`
-                }
-                type='submit'
-              >
+              <button className={classes.loginBtn} type='submit'>
                 {!loginMode ? t('SignUp') : t('login')}
               </button>
             </div>

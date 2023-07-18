@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 /* eslint-disable react-refresh/only-export-components */
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { PayloadAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import {
   emailLogin,
   emailSignUp,
@@ -24,6 +24,7 @@ export interface User {
   id: string;
   error: string;
   language: string;
+  loading: boolean;
 }
 
 const initialState: User = {
@@ -34,6 +35,7 @@ const initialState: User = {
   id: '',
   error: '',
   language: 'hr',
+  loading: true,
 };
 
 export const login = createAsyncThunk(
@@ -210,12 +212,16 @@ export const UserSlice = createSlice({
       state.username = action.payload.username;
       state.loggedIn = !!action.payload.username;
       state.id = action.payload.id;
+      // state.loading = false;
       if (action.payload.id) {
         state.loggedIn = true;
       }
     },
     setLanguage(state, action) {
       state.language = action.payload;
+    },
+    setLoading(state, action: PayloadAction<boolean>) {
+      state.loading = action.payload;
     },
   },
   extraReducers(builder) {
@@ -252,6 +258,7 @@ export const UserSlice = createSlice({
       state.username = '';
       state.password = '';
       state.id = '';
+      state.error = '';
     });
 
     builder.addCase(startIndChat.rejected, (state, action) => {

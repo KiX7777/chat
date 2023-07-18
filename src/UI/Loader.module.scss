@@ -1,0 +1,21 @@
+@use '../styles/colors' as *;
+
+.loader {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  translate: -50% -50%;
+
+  span {
+    background-color: $primary !important;
+    width: 3.5rem !important;
+    height: 3.5rem !important;
+  }
+}
+
+@media screen and (width < 500px) {
+  .loader span {
+    width: 2.4rem !important;
+    height: 2.4rem !important;
+  }
+}
